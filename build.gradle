@@ -1,0 +1,41 @@
+buildscript {
+	ext {
+		springBootVersion = '2.6.1'
+	}
+
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+	}
+}
+
+allprojects {
+	group 'kr.kro.srvr-study'
+	version '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	group = 'kr.kro.srvr-study'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}
