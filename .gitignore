@@ -43,6 +43,7 @@ out/
 .history/
 .history
 .ionide
+.env
 
 ### Package Files ###
 *.jar
