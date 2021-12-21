@@ -1,9 +1,15 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
-export const IconButton = ({ src, onClick }: any) => {
+type Props = {
+  src?: string;
+  alt?: string;
+  onClick?: MouseEventHandler;
+};
+
+export const IconButton = ({ src, onClick, alt }: Props) => {
   return (
     <button onClick={onClick}>
-      <img src={src} />
+      <img src={src} alt={alt} />
     </button>
   );
 };

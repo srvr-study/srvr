@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import Main from "./pages/Main";
+import RootProvider from "./providers/RootProvider";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-      </Routes>
+      <RootProvider>
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </RootProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
