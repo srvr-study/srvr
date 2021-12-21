@@ -1,6 +1,7 @@
 export const commonTextKR = Object.freeze({
-  PageTitle: "스프링 포트폴리오 프로젝트",
-  Document: "Document",
+  MainPageTitle: "스프링 포트폴리오 프로젝트",
+  HeaderNavItemDocument: "Document",
+  HeaderNavItemHome: "Home",
 });
 
 export const errorKR = Object.freeze({

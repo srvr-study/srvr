@@ -13,10 +13,16 @@ export const DefaultHeader = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <HeaderContainer>
-      <PageTitle>{commonTextKR.PageTitle}</PageTitle>
+      <PageTitle>{commonTextKR.MainPageTitle}</PageTitle>
       <FlexRightWrapper>
-        <IconButton src={theme === lightTheme ? documentDark : documentLight} />
-        <IconButton src={theme === lightTheme ? homeDark : homeLight} />
+        <IconButton
+          src={theme === lightTheme ? documentDark : documentLight}
+          title={commonTextKR.HeaderNavItemDocument}
+        />
+        <IconButton
+          src={theme === lightTheme ? homeDark : homeLight}
+          title={commonTextKR.HeaderNavItemHome}
+        />
       </FlexRightWrapper>
     </HeaderContainer>
   );
@@ -50,5 +56,6 @@ const PageTitle = styled.h2`
 `;
 
 const FlexRightWrapper = styled.div`
+  display: flex;
   margin-left: auto;
 `;
