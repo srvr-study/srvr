@@ -46,8 +46,9 @@ const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   transition: 0.5s;
 
   &:hover {
-    transform: translateY(-5px);
     box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.15);
+
+    transform: translateY(-5px);
   }
 
   ${({ isActive }) =>
@@ -56,8 +57,9 @@ const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
       opacity: 0.5;
 
       &:hover {
-        transform: none;
         box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+
+        transform: none;
         cursor: not-allowed;
       }
     `};
@@ -75,6 +77,7 @@ const NonActive = styled.span`
 
 const Title = styled.span`
   margin: 10px 0;
+
   ${({ theme }) => theme.font.build({ size: theme.font.size.lg })}
 
   color: ${({ theme }) => theme.color.secondary};

@@ -11,6 +11,7 @@ import { ThemeContext } from "../../providers/ThemeProvider";
 
 export const DefaultHeader = () => {
   const { theme } = useContext(ThemeContext);
+
   return (
     <HeaderContainer>
       <PageTitle>{commonTextKR.MainPageTitle}</PageTitle>
@@ -57,5 +58,6 @@ const PageTitle = styled.h2`
 
 const FlexRightWrapper = styled.div`
   display: flex;
+
   margin-left: auto;
 `;
