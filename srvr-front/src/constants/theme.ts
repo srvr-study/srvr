@@ -65,6 +65,7 @@ const lightColors = {
   white: "#ffffff",
   placeholder: "#7E7E7E",
   text: "#252525",
+  red: "#DB2323",
 };
 
 const darkColors = {
@@ -74,6 +75,7 @@ const darkColors = {
   white: "#ffffff",
   placeholder: "#7E7E7E",
   text: "#252525",
+  red: "#DB2323",
 };
 
 const display = {
