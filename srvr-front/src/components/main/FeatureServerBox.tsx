@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { mainTextKR } from "../../constants/text";
 
 export type FeatureServer = {
   name: string;
@@ -16,14 +17,12 @@ type Props = {
 
 const FeatureServerBox = ({ title, isActive, isNeedAuth = false }: Props) => {
   return (
-    <FeatureServerBoxContainer
-      onClick={() => console.log("heello")}
-      isActive={isActive}
-      disabled={!isActive}
-    >
-      {!isActive && <NonActive>개발 중 입니다.</NonActive>}
+    <FeatureServerBoxContainer isActive={isActive} disabled={!isActive}>
+      {!isActive && (
+        <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
+      )}
       <Title>{title}</Title>
-      {isNeedAuth && <NeedAuth>인증이 선행되어야 합니다.</NeedAuth>}
+      {isNeedAuth && <NeedAuth>{mainTextKR.FeatureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );
 };
