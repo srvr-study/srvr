@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { lightTheme } from "../../constants/theme";
-import { commonTextKR } from "../../constants/text";
-import { IconButton } from "./Button";
-import documentDark from "../../assets/icons/document-dark.svg";
-import documentLight from "../../assets/icons/document-light.svg";
-import homeDark from "../../assets/icons/home-dark.svg";
-import homeLight from "../../assets/icons/home-light.svg";
-import { ThemeContext } from "../../providers/ThemeProvider";
+import documentDark from "@assets/icons/document-dark.svg";
+import documentLight from "@assets/icons/document-light.svg";
+import homeDark from "@assets/icons/home-dark.svg";
+import homeLight from "@assets/icons/home-light.svg";
+import { IconButton } from "@components/common/Button";
+import { commonTextKR } from "@constants/text";
+import { lightTheme } from "@constants/theme";
+import { ThemeContext } from "@providers/ThemeProvider";
 
 export function DefaultHeader(): JSX.Element {
   const { theme } = useContext(ThemeContext);

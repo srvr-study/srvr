@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { mainTextKR } from "../../constants/text";
+import { mainTextKR } from "@constants/text";
 
-export type FeatureServer = {
+export type FeatureServerType = {
   name: string;
   title: string;
   isActive: boolean;

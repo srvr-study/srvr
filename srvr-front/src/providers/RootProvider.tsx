@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeProvider from "./ThemeProvider";
+import ThemeProvider from "@providers/ThemeProvider";
 
 type Props = {
   children: React.ReactNode;

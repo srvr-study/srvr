@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { lightTheme } from "../../constants/theme";
-import { IconButton } from "./Button";
-import { DefaultHeader } from "./Header";
-import sun from "../../assets/icons/sun-light.svg";
-import moon from "../../assets/icons/moon-dark.svg";
-import { ThemeContext } from "../../providers/ThemeProvider";
-import { errorKR } from "../../constants/text";
+import moon from "@assets/icons/moon-dark.svg";
+import sun from "@assets/icons/sun-light.svg";
+import { IconButton } from "@components/common/Button";
+import { DefaultHeader } from "@components/common/Header";
+import { errorKR } from "@constants/text";
+import { lightTheme } from "@constants/theme";
+import { ThemeContext } from "@providers/ThemeProvider";
 
 type Props = {
   children: React.ReactNode;

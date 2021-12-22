@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import Main from "./pages/Main";
-import RootProvider from "./providers/RootProvider";
-import reportWebVitals from "./reportWebVitals";
+import "@/index.css";
+import reportWebVitals from "@/reportWebVitals";
+import Main from "@pages/Main";
+import RootProvider from "@providers/RootProvider";
 
 ReactDOM.render(
   <React.StrictMode>

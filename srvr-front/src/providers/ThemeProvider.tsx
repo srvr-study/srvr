@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
-import { errorKR } from "../constants/text";
-import { darkTheme, lightTheme, Theme } from "../constants/theme";
+import { errorKR } from "@constants/text";
+import { darkTheme, lightTheme, Theme } from "@constants/theme";
 
 type Props = {
   children: React.ReactNode;
