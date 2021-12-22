@@ -3,9 +3,27 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { errorKR } from "../constants/text";
 import { darkTheme, lightTheme, Theme } from "../constants/theme";
 
-const initialState: any = {};
+type Props = {
+  children: React.ReactNode;
+};
 
-const reducer = (_: any, action: any) => {
+export default function ThemeProvider({ children }: Props): JSX.Element {
+  const [theme, themeDispatch] = useReducer<
+    (state: Theme, action: ThemeAction) => Theme
+  >(reducer, lightTheme);
+
+  return (
+    <ThemeContext.Provider value={{ theme, themeDispatch }}>
+      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+    </ThemeContext.Provider>
+  );
+}
+
+type ThemeAction = {
+  type: string;
+};
+
+const reducer = (_: Theme, action: ThemeAction) => {
   switch (action.type) {
     case "SET_LIGHT_THEME":
       return lightTheme;
@@ -16,18 +34,11 @@ const reducer = (_: any, action: any) => {
   }
 };
 
-const ThemeProvider = ({ children }: any) => {
-  const [theme, themeDispatch] = useReducer<(state: any, action: any) => Theme>(
-    reducer,
-    lightTheme
-  );
-  return (
-    <ThemeContext.Provider value={{ theme, themeDispatch }}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
-    </ThemeContext.Provider>
-  );
+type ThemeContextType = {
+  theme: Theme;
+  themeDispatch?: React.Dispatch<any>;
 };
 
-export const ThemeContext = createContext(initialState);
-
-export default ThemeProvider;
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: lightTheme,
+});

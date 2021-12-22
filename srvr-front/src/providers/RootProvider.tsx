@@ -1,8 +1,10 @@
 import React from "react";
 import ThemeProvider from "./ThemeProvider";
 
-const RootProvider = ({ children }: any) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+type Props = {
+  children: React.ReactNode;
 };
 
-export default RootProvider;
+export default function RootProvider({ children }: Props): JSX.Element {
+  return <ThemeProvider>{children}</ThemeProvider>;
+}

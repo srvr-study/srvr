@@ -15,7 +15,11 @@ type Props = {
   isNeedAuth: boolean;
 };
 
-const FeatureServerBox = ({ title, isActive, isNeedAuth = false }: Props) => {
+export default function FeatureServerBox({
+  title,
+  isActive,
+  isNeedAuth = false,
+}: Props): JSX.Element {
   return (
     <FeatureServerBoxContainer isActive={isActive} disabled={!isActive}>
       {!isActive && (
@@ -25,9 +29,7 @@ const FeatureServerBox = ({ title, isActive, isNeedAuth = false }: Props) => {
       {isNeedAuth && <NeedAuth>{mainTextKR.FeatureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );
-};
-
-export default FeatureServerBox;
+}
 
 const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   position: relative;

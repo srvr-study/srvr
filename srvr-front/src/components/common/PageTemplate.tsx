@@ -6,11 +6,19 @@ import { DefaultHeader } from "./Header";
 import sun from "../../assets/icons/sun-light.svg";
 import moon from "../../assets/icons/moon-dark.svg";
 import { ThemeContext } from "../../providers/ThemeProvider";
+import { errorKR } from "../../constants/text";
 
-export const DefaultPageTemplate = ({ children }: any) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export function DefaultPageTemplate({ children }: Props): JSX.Element {
   const { theme, themeDispatch } = useContext(ThemeContext);
 
   const changeTheme = () => {
+    if (!themeDispatch) {
+      throw new Error(errorKR.FailedToSetTheme);
+    }
     if (theme === lightTheme) {
       themeDispatch({ type: "SET_DARK_THEME" });
     } else {
@@ -30,7 +38,7 @@ export const DefaultPageTemplate = ({ children }: any) => {
       </FloatingContainer>
     </TemplateContainder>
   );
-};
+}
 
 const TemplateContainder = styled.div`
   width: 100%;

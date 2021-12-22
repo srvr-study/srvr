@@ -5,6 +5,15 @@ type FontProps = {
   size: string;
 };
 
+type Color = {
+  primary: string;
+  secondary: string;
+  background: string;
+  white: string;
+  placeholder: string;
+  text: string;
+};
+
 export type Theme = {
   font: {
     family: {
@@ -19,14 +28,7 @@ export type Theme = {
     };
     build: ({ family, style, weight, size }: FontProps) => string;
   };
-  color: {
-    primary: string;
-    secondary: string;
-    background: string;
-    white: string;
-    placeholder: string;
-    text: string;
-  };
+  color: Color;
   display: any;
 };
 
@@ -92,22 +94,17 @@ const display = {
   `,
 };
 
-export const lightTheme: Theme = {
-  font: {
-    family: fontFamilies,
-    size: fontSizes,
-    build: fontBuild,
-  },
-  color: lightColors,
-  display,
-};
+function createTheme(colorsType: Color): Theme {
+  return {
+    font: {
+      family: fontFamilies,
+      size: fontSizes,
+      build: fontBuild,
+    },
+    color: colorsType,
+    display,
+  };
+}
 
-export const darkTheme: Theme = {
-  font: {
-    family: fontFamilies,
-    size: fontSizes,
-    build: fontBuild,
-  },
-  color: darkColors,
-  display,
-};
+export const lightTheme: Theme = createTheme(lightColors);
+export const darkTheme: Theme = createTheme(darkColors);

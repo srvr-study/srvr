@@ -2,19 +2,19 @@ import React, { MouseEventHandler } from "react";
 import styled, { css } from "styled-components";
 
 type Props = {
-  src?: string;
+  src: string;
   alt?: string;
   onClick?: MouseEventHandler;
   title?: string;
 };
 
-export const IconButton = ({ src, onClick, alt, title }: Props) => {
+export function IconButton({ src, onClick, alt, title }: Props): JSX.Element {
   return (
     <IconButtonWrapper onClick={onClick} title={title}>
       <img src={src} alt={alt} />
     </IconButtonWrapper>
   );
-};
+}
 
 const IconButtonWrapper = styled.button<{ title?: string }>`
   position: relative;

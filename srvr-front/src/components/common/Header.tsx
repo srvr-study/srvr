@@ -9,7 +9,7 @@ import homeDark from "../../assets/icons/home-dark.svg";
 import homeLight from "../../assets/icons/home-light.svg";
 import { ThemeContext } from "../../providers/ThemeProvider";
 
-export const DefaultHeader = () => {
+export function DefaultHeader(): JSX.Element {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -27,7 +27,7 @@ export const DefaultHeader = () => {
       </FlexRightWrapper>
     </HeaderContainer>
   );
-};
+}
 
 const HeaderContainer = styled.div`
   display: flex;

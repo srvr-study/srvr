@@ -6,7 +6,7 @@ import FeatureServerBox, {
   FeatureServer,
 } from "../components/main/FeatureServerBox";
 
-const Main = () => {
+export default function Main(): JSX.Element {
   const [featureServers, setFeatuerServers] = useState<
     Map<String, FeatureServer>
   >(new Map());
@@ -38,9 +38,7 @@ const Main = () => {
       </FeatureServerWrapper>
     </DefaultPageTemplate>
   );
-};
-
-export default Main;
+}
 
 const FeatureServerWrapper = styled.div`
   display: flex;
