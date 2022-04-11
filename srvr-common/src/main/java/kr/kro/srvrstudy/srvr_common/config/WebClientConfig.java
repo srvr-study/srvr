@@ -9,9 +9,8 @@ import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
 
-
 @Configuration
-public class ApiClientConfig {
+public class WebClientConfig {
 
     @Bean
     public WebClient webClient() {
