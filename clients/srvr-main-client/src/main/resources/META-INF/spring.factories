@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+kr.kro.srvrstudy.srvr_main_client.config.MainServerClientConfig
