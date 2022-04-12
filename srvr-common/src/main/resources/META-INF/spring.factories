@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+kr.kro.srvrstudy.srvr_common.config.WebClientConfig
+
