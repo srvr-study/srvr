@@ -1,4 +1,4 @@
-package kr.kro.srvrstudy.srvr_main.controller;
+package kr.kro.srvrstudy.srvr_main.presentation.controller;
 
 import kr.kro.srvrstudy.srvr_common.api.response.ApiResponse;
 import kr.kro.srvrstudy.srvr_common.api.response.SuccessResponse;
