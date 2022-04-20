@@ -5,14 +5,20 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+=======
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+>>>>>>> 759882c (feat: STOMP 설정 및 간단 스케쥴러 추가 및 패키지 구조 정립)
 
 @Repository
 public class FeatureServerStompRepository {
 
+<<<<<<< HEAD
     private final FeatureServerRepository featureServerRepository;
     private final ConcurrentHashMap<String, FeatureServer> featureServerMap;
 
@@ -27,12 +33,20 @@ public class FeatureServerStompRepository {
                                               .stream()
                                               .map(FeatureServer::of)
                                               .collect(Collectors.toList()));
+=======
+    private ConcurrentHashMap<String, FeatureServer> featureServerMap;
+
+    @PostConstruct
+    private void init(){
+        featureServerMap = new ConcurrentHashMap<>();
+>>>>>>> 759882c (feat: STOMP 설정 및 간단 스케쥴러 추가 및 패키지 구조 정립)
     }
 
     public List<FeatureServer> findAll() {
         return new ArrayList<>(featureServerMap.values());
     }
 
+<<<<<<< HEAD
     public void updateFeatureServer(FeatureServer featureServer) {
         this.featureServerMap.put(featureServer.getName(), featureServer);
     }
@@ -43,5 +57,10 @@ public class FeatureServerStompRepository {
 
     public void deleteFeatureServer(String featureServerName) {
         this.featureServerMap.remove(featureServerName);
+=======
+    public FeatureServer updateFeatureServer(FeatureServer featureServer){
+        this.featureServerMap.put(featureServer.getName(), featureServer);
+        return featureServer;
+>>>>>>> 759882c (feat: STOMP 설정 및 간단 스케쥴러 추가 및 패키지 구조 정립)
     }
 }
