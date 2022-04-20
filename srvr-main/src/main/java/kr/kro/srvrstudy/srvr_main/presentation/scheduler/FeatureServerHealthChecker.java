@@ -17,6 +17,7 @@ public class FeatureServerHealthChecker {
 
     @Scheduled(fixedDelay = 10000)
     public void healthCheck(){
-        template.convertAndSend("/sub/feature-servers", featureServerService.getFeatureServers());
+        template.convertAndSend("/sub/feature-servers", featureServerService.getRealTimeFeatureServers());
     }
+
 }
