@@ -1,6 +1,9 @@
 dependencies {
     implementation project(":srvr-common")
+<<<<<<< HEAD
     implementation 'org.flywaydb:flyway-core'
+=======
+>>>>>>> 83dc65f (feat: 기능 서버 기능 구현)
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'

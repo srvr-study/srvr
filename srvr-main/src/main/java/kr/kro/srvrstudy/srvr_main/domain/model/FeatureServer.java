@@ -24,17 +24,17 @@ public class FeatureServer {
 
     public static FeatureServer of(FeatureServerEntity entity) {
         return FeatureServer.builder()
-                            .host(entity.getHost())
-                            .name(entity.getName())
-                            .description(entity.getDescription())
-                            .tags(Optional.ofNullable(entity.getFeatureServerTags())
-                                          .orElse(Collections.emptyList())
-                                          .stream()
-                                          .map(FeatureServerTagEntity::getTag)
-                                          .map(Tag::of)
-                                          .collect(Collectors.toList()))
-                            .status(DISABLED)
-                            .build();
+                .host(entity.getHost())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .tags(Optional.ofNullable(entity.getFeatureServerTags())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(FeatureServerTagEntity::getTag)
+                        .map(Tag::of)
+                        .collect(Collectors.toList()))
+                .status(DISABLED)
+                .build();
     }
 
     public void setStatus(FeatureServerStatus status) {
