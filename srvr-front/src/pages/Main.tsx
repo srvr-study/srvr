@@ -5,11 +5,14 @@ import FeatureServerBox, {
   FeatureServerType,
 } from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
+import useStompClient from "@/hooks/useStompClient";
 
 export default function Main(): JSX.Element {
   const [featureServers, setFeatuerServers] = useState<
     Map<String, FeatureServerType>
   >(new Map());
+
+  const { subscribe } = useStompClient();
 
   useEffect(() => {
     fetchFeatureServers().then((response: any) => {
@@ -22,6 +25,10 @@ export default function Main(): JSX.Element {
         return newState;
       });
     });
+
+    subscribe("/subscribe/feature-servers", (server) => {
+      console.log(server);
+    })
   }, []);
 
   return (
