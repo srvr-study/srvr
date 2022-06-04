@@ -8,7 +8,7 @@ import { DefaultPageTemplate } from "@components/common/PageTemplate";
 import useStompClient from "@/hooks/useStompClient";
 
 export default function Main(): JSX.Element {
-  const [featureServers, setFeatuerServers] = useState<
+  const [featureServers, setFeatureServers] = useState<
     Map<String, FeatureServerType>
   >(new Map());
 
@@ -17,7 +17,7 @@ export default function Main(): JSX.Element {
   useEffect(() => {
     fetchFeatureServers().then((response: any) => {
       const data = response.data;
-      setFeatuerServers((prev) => {
+      setFeatureServers((prev) => {
         const newState = new Map(prev);
         data.forEach((featureServer: FeatureServerType) => {
           newState.set(featureServer.name, featureServer);
