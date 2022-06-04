@@ -17,7 +17,7 @@ interface SendMessage {
 
 export default function useStompClient() {
     const webStompClient = useRef<StompJs.CompatClient>(StompClient);
-    const [subscription, setSusbscription] = useState<Map<string, Subscription>>(new Map());
+    const [subscription, setSubscription] = useState<Map<string, Subscription>>(new Map());
     const [sendMessage, setSendMessage] = useState<SendMessage>();
 
     useEffect(() => {
@@ -44,11 +44,11 @@ export default function useStompClient() {
     }
 
     function subscribe(destination: string, callback: StompJs.messageCallbackType, headers?: StompJs.StompHeaders) {
-        setSusbscription((prev) => new Map(prev).set(destination, { destination, callback, headers, active: false }));
+        setSubscription((prev) => new Map(prev).set(destination, { destination, callback, headers, active: false }));
     }
 
     function unsubscribe(destination: string) {
-        setSusbscription((prev) => {
+        setSubscription((prev) => {
             const newMap = new Map(prev);
             webStompClient.current.unsubscribe(destination);
             newMap.delete(destination);
