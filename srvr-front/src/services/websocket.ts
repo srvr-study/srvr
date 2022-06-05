@@ -4,7 +4,7 @@ import SockJS from "sockjs-client";
 const url = "http://localhost:8080/websocket/main";
 const client = StompJs.Stomp.over(() => new SockJS(url));
 
-client.reconnect_delay = 2000;
+client.reconnect_delay = 4000;
 
 client.onConnect = function (frame) {
     console.info('connecting');
