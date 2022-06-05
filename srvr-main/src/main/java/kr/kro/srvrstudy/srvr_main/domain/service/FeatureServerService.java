@@ -12,8 +12,9 @@ import kr.kro.srvrstudy.srvr_main.persist.repository.FeatureServerStompRepositor
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class FeatureServerService {
     private final FeatureServerStompRepository featureServerStompRepository;
     private final FeatureServerRepository featureServerRepository;
 
+    @Transactional(readOnly = true)
     public FeatureServer getByFeatureServerName(String name) {
         return featureServerRepository.findByName(name)
                                       .map(FeatureServer::of)
@@ -31,7 +33,7 @@ public class FeatureServerService {
     }
 
     public List<FeatureServer> getFeatureServers() {
-        return featureServerRepository.findAll().stream()
+        return featureServerRepository.findAllByOrderByName().stream()
                                       .map(FeatureServer::of)
                                       .collect(Collectors.toList());
     }
@@ -46,15 +48,17 @@ public class FeatureServerService {
         Validator.validateEmpty(featureServerRequest.getHost(), this.featureServerRepository::findByHost);
 
         FeatureServerEntity newFeatureServerEntity = FeatureServerEntity.builder()
-                                                       .featureServerId(IdGenerator.generate())
-                                                       .host(featureServerRequest.getHost())
-                                                       .name(featureServerRequest.getName())
-                                                       .description(featureServerRequest.getDescription())
-                                                       .creatorMemberId(featureServerRequest.getUpdatorMemberId())
-                                                       .lastUpdaterMemberId(featureServerRequest.getUpdatorMemberId())
-                                                       .build();
+                                                                        .featureServerId(IdGenerator.generate())
+                                                                        .host(featureServerRequest.getHost())
+                                                                        .name(featureServerRequest.getName())
+                                                                        .description(featureServerRequest.getDescription())
+                                                                        .creatorMemberId(featureServerRequest.getUpdatorMemberId())
+                                                                        .createdAt(LocalDateTime.now())
+                                                                        .lastUpdaterMemberId(featureServerRequest.getUpdatorMemberId())
+                                                                        .build();
 
         featureServerRepository.saveAndFlush(newFeatureServerEntity);
+        featureServerStompRepository.updateFeatureServer(FeatureServer.of(newFeatureServerEntity));
     }
 
     @Transactional
@@ -83,6 +87,7 @@ public class FeatureServerService {
         FeatureServerEntity featureServerEntity = featureServerRepository.findByName(featureServer.getName())
                                                                          .orElseThrow(() -> new ApiFailureException(ErrorCode.INVALID_REQUEST));
         featureServerRepository.delete(featureServerEntity);
+        featureServerStompRepository.deleteFeatureServer(featureServer.getName());
     }
 
 }

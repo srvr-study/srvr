@@ -11,12 +11,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    @Value("${srvr.main.websocket.end_point:/websocket/main}")
+    private String endPoint;
+
     @Value("${srvr.main.allow-origins}")
     private String[] allowOrigins;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/main")
+        registry.addEndpoint(endPoint)
                 .setAllowedOrigins(allowOrigins)
                 .withSockJS();
     }

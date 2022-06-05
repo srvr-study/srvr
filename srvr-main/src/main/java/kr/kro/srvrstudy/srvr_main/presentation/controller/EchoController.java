@@ -5,7 +5,7 @@ import kr.kro.srvrstudy.srvr_common.api.response.SuccessResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/echo")
+@RequestMapping("/api/v1/echo")
 public class EchoController {
 
     @PostMapping("/")

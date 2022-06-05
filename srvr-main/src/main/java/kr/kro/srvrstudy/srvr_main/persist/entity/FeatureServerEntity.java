@@ -3,6 +3,7 @@ package kr.kro.srvrstudy.srvr_main.persist.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,7 +17,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "feature_server")
-public class FeatureServerEntity implements Auditing {
+@EntityListeners(AuditingEntityListener.class)
+public class FeatureServerEntity {
 
     @Id
     @Column(name = "feature_server_id", nullable = false)
@@ -37,7 +39,7 @@ public class FeatureServerEntity implements Auditing {
     @Column(name = "last_updater_member_id", nullable = false)
     private Long lastUpdaterMemberId;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdAt;
 

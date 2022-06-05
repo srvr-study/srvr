@@ -3,6 +3,7 @@ package kr.kro.srvrstudy.srvr_main.persist.entity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,8 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "feature_server_tag")
-public class FeatureServerTagEntity implements Auditing {
+@EntityListeners(AuditingEntityListener.class)
+public class FeatureServerTagEntity {
 
     @EmbeddedId
     private FeatureServerTagPk pk;

@@ -6,14 +6,13 @@ import kr.kro.srvrstudy.srvr_main.domain.model.FeatureServer;
 import kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerRequest;
 import kr.kro.srvrstudy.srvr_main.domain.service.FeatureServerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class FeatureServerController {
 
-    private final SimpMessagingTemplate template;
     private final FeatureServerService featureServerService;
 
     @GetMapping("/feature-servers")
@@ -28,22 +27,17 @@ public class FeatureServerController {
     }
 
     @PutMapping("/feature-servers/{name}")
-    public ApiResponse<Void> updateFeatureServer(@PathVariable("name") String featureServerName,
+    public ApiResponse<Void> updateFeatureServer(@PathVariable String name,
                                                  @RequestBody FeatureServerRequest featureServerRequest) {
-        featureServerService.updateFeatureServer(featureServerName, featureServerRequest);
-        template.convertAndSend("/sub/feature-servers", featureServerService.getRealTimeFeatureServers());
+
+        featureServerService.updateFeatureServer(name, featureServerRequest);
         return new SuccessResponse<>();
     }
 
     @DeleteMapping("/feature-servers/{name}")
-    public ApiResponse<Void> deleteFeatureServer(@ModelAttribute("feature-server") FeatureServer featureServer) {
+    public ApiResponse<Void> deleteFeatureServer(@PathVariable String name) {
+        FeatureServer featureServer = featureServerService.getByFeatureServerName(name);
         featureServerService.deleteFeatureServer(featureServer);
-        template.convertAndSend("/sub/feature-servers", featureServerService.getRealTimeFeatureServers());
         return new SuccessResponse<>();
-    }
-
-    @ModelAttribute(value = "feature-server")
-    public FeatureServer getFeatureServer(@PathVariable("name") String name) {
-        return featureServerService.getByFeatureServerName(name);
     }
 }

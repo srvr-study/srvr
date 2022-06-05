@@ -5,7 +5,9 @@ import kr.kro.srvrstudy.srvr_main.persist.entity.FeatureServerTagEntity;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerStatus.DISABLED;
@@ -25,9 +27,12 @@ public class FeatureServer {
                             .host(entity.getHost())
                             .name(entity.getName())
                             .description(entity.getDescription())
-                            .tags(entity.getFeatureServerTags().stream()
-                                        .map(FeatureServerTagEntity::getTag)
-                                        .map(Tag::of).collect(Collectors.toList()))
+                            .tags(Optional.ofNullable(entity.getFeatureServerTags())
+                                          .orElse(Collections.emptyList())
+                                          .stream()
+                                          .map(FeatureServerTagEntity::getTag)
+                                          .map(Tag::of)
+                                          .collect(Collectors.toList()))
                             .status(DISABLED)
                             .build();
     }
