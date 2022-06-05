@@ -1,17 +1,23 @@
 import * as StompJs from '@stomp/stompjs';
 import SockJS from "sockjs-client";
 
-const sockJs = new SockJS("http://localhost:8080/main");
-const client = StompJs.Stomp.over(sockJs)
+const url = "http://localhost:8080/websocket/main";
+const client = StompJs.Stomp.over(() => new SockJS(url));
+
+client.reconnect_delay = 2000;
 
 client.onConnect = function (frame) {
-    console.log('connecting');
+    console.info('connecting');
 };
 
 client.onStompError = function (frame) {
-    console.log('Broker reported error: ' + frame.headers['message']);
-    console.log('Additional details: ' + frame.body);
+    console.info('Broker reported error: ' + frame.headers['message']);
+    console.info('Additional details: ' + frame.body);
 };
+
+client.onDisconnect= function (frame) {
+    console.log('disconnect');
+}
 
 client.activate();
 
