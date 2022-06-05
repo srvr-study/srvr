@@ -21,7 +21,7 @@ interface Color extends CommonColor {
   textSecondary: string;
   placeholder: string;
   border: string;
-};
+}
 
 type Size = {
   xlg: string;
@@ -120,7 +120,7 @@ const darkColors: Color = {
   border: "#22272E",
 };
 
-const display = {
+export const display = {
   flexCenter: `
     display: flex;
     justify-content: center;

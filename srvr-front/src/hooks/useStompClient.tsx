@@ -35,7 +35,7 @@ export default function useStompClient() {
                     subscription.active = true;
                     const { destination, callback, headers } = subscription;
                     webStompClient.current.subscribe(destination, callback, headers);
-                }
+                }  
             });
         }
     }, [subscriptions])

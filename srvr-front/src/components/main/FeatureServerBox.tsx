@@ -8,22 +8,28 @@ export type FeatureServerType = {
   title: string;
   isActive: boolean;
   isNeedAuth: boolean;
+  path: string;
 };
 
 type Props = {
   title: string;
   isActive: boolean;
   isNeedAuth: boolean;
+  path: string;
 };
 
 export default function FeatureServerBox({
   title,
   isActive,
   isNeedAuth = false,
+  path,
 }: Props): JSX.Element {
   return (
-    <FeatureServerBoxContainer isActive={isActive} disabled={!isActive}>
-      <Title>{title}</Title>
+    <FeatureServerBoxContainer
+      isActive={isActive}
+      disabled={!isActive}
+      onClick={() => (window.location.href = path)}
+    >
       {!isActive && (
         <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
       )}

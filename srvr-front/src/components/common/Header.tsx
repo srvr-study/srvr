@@ -5,24 +5,28 @@ import documentLight from "@assets/icons/document-light.svg";
 import homeDark from "@assets/icons/home-dark.svg";
 import homeLight from "@assets/icons/home-light.svg";
 import { IconButton } from "@components/common/Button";
-import { commonTextKR } from "@constants/text";
 import { lightTheme, Theme } from "@constants/theme";
+import { HeaderText } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
 
-export function DefaultHeader(): JSX.Element {
+export function DefaultHeader({
+  headerText,
+}: {
+  headerText: HeaderText;
+}): JSX.Element {
   const { theme } = useContext(ThemeContext);
 
   return (
     <HeaderContainer>
-      <PageTitle>{commonTextKR.MainPageTitle}</PageTitle>
+      <PageTitle>{headerText.PageTitle}</PageTitle>
       <FlexRightWrapper>
         <IconButton
           src={theme === lightTheme ? documentDark : documentLight}
-          title={commonTextKR.HeaderNavItemDocument}
+          title={headerText.HeaderNavItemDocument}
         />
         <IconButton
           src={theme === lightTheme ? homeDark : homeLight}
-          title={commonTextKR.HeaderNavItemHome}
+          title={headerText.HeaderNavItemHome}
         />
       </FlexRightWrapper>
     </HeaderContainer>

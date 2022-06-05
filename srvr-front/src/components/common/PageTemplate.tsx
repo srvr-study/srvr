@@ -4,15 +4,19 @@ import moon from "@assets/icons/moon-dark.svg";
 import sun from "@assets/icons/sun-light.svg";
 import { IconButton } from "@components/common/Button";
 import { DefaultHeader } from "@components/common/Header";
-import { errorKR } from "@constants/text";
 import { lightTheme, Theme } from "@constants/theme";
+import { HeaderText, errorKR } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
 
 type Props = {
   children: React.ReactNode;
+  headerText: HeaderText;
 };
 
-export function DefaultPageTemplate({ children }: Props): JSX.Element {
+export function DefaultPageTemplate({
+  children,
+  headerText,
+}: Props): JSX.Element {
   const { theme, themeDispatch } = useContext(ThemeContext);
 
   const changeTheme = () => {
@@ -27,8 +31,8 @@ export function DefaultPageTemplate({ children }: Props): JSX.Element {
   };
 
   return (
-    <TemplateContainder>
-      <DefaultHeader />
+    <TemplateContainer>
+      <DefaultHeader headerText={headerText} />
       {children}
       <FloatingContainer>
         <IconButton
@@ -36,11 +40,11 @@ export function DefaultPageTemplate({ children }: Props): JSX.Element {
           onClick={changeTheme}
         />
       </FloatingContainer>
-    </TemplateContainder>
+    </TemplateContainer>
   );
 }
 
-const TemplateContainder = styled.div`
+const TemplateContainer = styled.div`
   ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenterColumn}
 
   width: 100%;

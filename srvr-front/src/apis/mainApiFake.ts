@@ -3,15 +3,17 @@ export const fetchFeatureServers = () => {
     setTimeout(() => {
       resolve({
         result: {
-          contents:  [
+          contents: [
             {
               name: "Spring JWT Auth Server",
               isActive: true,
+              path: "/auth",
             },
             {
               name: "Spring Chatting Server",
               isActive: false,
               isNeedAuth: true,
+              path: "/chatting",
             },
           ]
         },

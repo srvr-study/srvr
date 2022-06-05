@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import "@/index.css";
 import reportWebVitals from "@/reportWebVitals";
+import Auth from "@pages/Auth";
 import Main from "@pages/Main";
 import RootProvider from "@providers/RootProvider";
 
@@ -12,6 +13,8 @@ ReactDOM.render(
     <BrowserRouter>
       <RootProvider>
         <Routes>
+          <Route path="/auth/login" element={<Auth />} />
+          <Route path="/auth/join" element={<Auth />} />
           <Route path="/" element={<Main />} />
         </Routes>
       </RootProvider>

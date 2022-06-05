@@ -1,11 +1,17 @@
-type CommonText = {
-  MainPageTitle: string;
+export type HeaderText = {
+  PageTitle: string;
   HeaderNavItemDocument: string;
   HeaderNavItemHome: string;
 };
 
-export const commonTextKR: CommonText = Object.freeze({
-  MainPageTitle: "스프링 포트폴리오 프로젝트",
+export const commonTextKR: HeaderText = Object.freeze({
+  PageTitle: "스프링 포트폴리오 프로젝트",
+  HeaderNavItemDocument: "Document",
+  HeaderNavItemHome: "Home",
+});
+
+export const authTextKR: HeaderText = Object.freeze({
+  PageTitle: "Spring JWT Auth",
   HeaderNavItemDocument: "Document",
   HeaderNavItemHome: "Home",
 });

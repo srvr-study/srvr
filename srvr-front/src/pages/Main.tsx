@@ -7,6 +7,7 @@ import FeatureServerBox, {
   FeatureServerType,
 } from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
+import { commonTextKR } from "@constants/text";
 import useStompClient from "@/hooks/useStompClient";
 import { Theme } from "@constants/theme";
 
@@ -29,7 +30,7 @@ export default function Main(): JSX.Element {
 
   useEffect(() => {
     fetchFeatureServers().then((body: any) => {
-      const data = body.result.contents
+      const data = body.result.contents;
       renderFeatureServer(data);
     });
 
@@ -37,11 +38,11 @@ export default function Main(): JSX.Element {
       const data = JSON.parse(featureServers.body);
       console.log(data)
       renderFeatureServer(data)
-    })
+    });
   }, []);
 
   return (
-    <DefaultPageTemplate>
+    <DefaultPageTemplate headerText={commonTextKR}>
       <FeatureServerWrapper>
         {Array.from(featureServersMap.values()).map((featureServer) => (
           <FeatureServerBox
@@ -49,6 +50,7 @@ export default function Main(): JSX.Element {
             title={featureServer.name}
             isActive={featureServer.isActive}
             isNeedAuth={featureServer.isNeedAuth}
+            path={featureServer.path}
           />
         ))}
       </FeatureServerWrapper>
