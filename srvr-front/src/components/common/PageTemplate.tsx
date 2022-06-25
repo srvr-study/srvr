@@ -9,10 +9,11 @@ import { lightTheme } from "@constants/theme";
 import { ThemeContext } from "@providers/ThemeProvider";
 
 type Props = {
+  title: string;
   children: React.ReactNode;
 };
 
-export function DefaultPageTemplate({ children }: Props): JSX.Element {
+export function DefaultPageTemplate({ title, children }: Props): JSX.Element {
   const { theme, themeDispatch } = useContext(ThemeContext);
 
   const changeTheme = () => {
@@ -28,7 +29,7 @@ export function DefaultPageTemplate({ children }: Props): JSX.Element {
 
   return (
     <TemplateContainder>
-      <DefaultHeader />
+      <DefaultHeader title={title} />
       {children}
       <FloatingContainer>
         <IconButton

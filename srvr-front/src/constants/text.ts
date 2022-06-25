@@ -10,6 +10,13 @@ export const commonTextKR: CommonText = Object.freeze({
   HeaderNavItemHome: "Home",
 });
 
+interface AuthText extends CommonText {}
+
+export const authTextKR: AuthText = {
+  ...commonTextKR,
+  MainPageTitle: "스프링 JWT Auth",
+};
+
 type MainText = {
   FeatureServerBoxIsNotActive: string;
   FeatureServerBoxNeedAuth: string;

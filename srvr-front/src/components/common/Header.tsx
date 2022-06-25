@@ -9,12 +9,16 @@ import { commonTextKR } from "@constants/text";
 import { lightTheme } from "@constants/theme";
 import { ThemeContext } from "@providers/ThemeProvider";
 
-export function DefaultHeader(): JSX.Element {
+type Props = {
+  title: string;
+};
+
+export function DefaultHeader({ title }: Props): JSX.Element {
   const { theme } = useContext(ThemeContext);
 
   return (
     <HeaderContainer>
-      <PageTitle>{commonTextKR.MainPageTitle}</PageTitle>
+      <PageTitle>{title}</PageTitle>
       <FlexRightWrapper>
         <IconButton
           src={theme === lightTheme ? documentDark : documentLight}

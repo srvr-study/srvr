@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 // import { fetchFeatureServers } from "@apis/mainApiFake";
+import useStompClient from "@/hooks/useStompClient";
 import { fetchFeatureServers } from "@apis/mainApi";
 import FeatureServerBox, {
   FeatureServerType,
 } from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import useStompClient from "@/hooks/useStompClient";
+import { commonTextKR } from "@constants/text";
 
 export default function Main(): JSX.Element {
   const [featureServersMap, setFeatureServersMap] = useState<
@@ -28,19 +29,19 @@ export default function Main(): JSX.Element {
 
   useEffect(() => {
     fetchFeatureServers().then((body: any) => {
-      const data = body.result.contents
+      const data = body.result.contents;
       renderFeatureServer(data);
     });
 
     subscribe("/subscribe/feature-servers", (featureServers) => {
       const data = JSON.parse(featureServers.body);
-      console.log(data)
-      renderFeatureServer(data)
-    })
+      console.log(data);
+      renderFeatureServer(data);
+    });
   }, []);
 
   return (
-    <DefaultPageTemplate>
+    <DefaultPageTemplate title={commonTextKR.MainPageTitle}>
       <FeatureServerWrapper>
         {Array.from(featureServersMap.values()).map((featureServer) => (
           <FeatureServerBox

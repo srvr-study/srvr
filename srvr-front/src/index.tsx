@@ -6,6 +6,7 @@ import "@/index.css";
 import reportWebVitals from "@/reportWebVitals";
 import Main from "@pages/Main";
 import RootProvider from "@providers/RootProvider";
+import Auth from "@pages/Auth";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <RootProvider>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       </RootProvider>
     </BrowserRouter>
