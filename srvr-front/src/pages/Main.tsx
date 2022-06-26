@@ -64,5 +64,6 @@ const FeatureServerWrapper = styled.div`
   width: 100%;
   padding: 55px 20px 0 45px;
 
+  flex-wrap: wrap;
   background: ${({ theme }) => theme.color.secondary_background};
 `;
