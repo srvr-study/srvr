@@ -10,11 +10,26 @@ export const commonTextKR: CommonText = Object.freeze({
   HeaderNavItemHome: "Home",
 });
 
-interface AuthText extends CommonText {}
+interface AuthText extends CommonText {
+  UsernamePlaceholder: string;
+  PasswordPlaceholder: string;
+  FindPasswordMessage: string;
+  FindPasswordText: string;
+  ErrorMessage: string;
+  LoginText: string;
+  SignUpText: string;
+}
 
 export const authTextKR: AuthText = {
   ...commonTextKR,
   MainPageTitle: "스프링 JWT Auth",
+  UsernamePlaceholder: "Username을 입력해주세요.",
+  PasswordPlaceholder: "Password을 입력해주세요.",
+  FindPasswordMessage: "비밀번호를 잃어버렸나요?",
+  FindPasswordText: "비밀번호 찾기",
+  ErrorMessage: "Username과 Password을 확인해주세요.",
+  LoginText: "로그인",
+  SignUpText: "회원가입",
 };
 
 type MainText = {

@@ -23,14 +23,25 @@ export default function AuthMain(): JSX.Element {
             <ContentTitle>Sign In</ContentTitle>
             <IconRoundInput
               src={userFill}
-              placeholder="Username을 입력해주세요."
+              placeholder={authTextKR.UsernamePlaceholder}
             />
-            <IconRoundInput src={key} placeholder="Password를 입력해주세요." />
-            <Message>비밀번호를 잃어버렸나요? 비밀번호 찾기</Message>
-            <RedMessage>Username과 Password을 확인해주세요.</RedMessage>
+            <IconRoundInput
+              src={key}
+              type={"password"}
+              placeholder={authTextKR.PasswordPlaceholder}
+            />
+            <Message className="findPasswordMessage">
+              {authTextKR.FindPasswordMessage}
+              <span>{authTextKR.FindPasswordText}</span>
+            </Message>
+            <RedMessage>{authTextKR.ErrorMessage}</RedMessage>
             <OAuthProviders />
-            <TextButtonBox width="460px" height="77px" text="로그인" />
-            <TextButton text="회원가입" />
+            <TextButtonBox
+              width="460px"
+              height="77px"
+              text={authTextKR.LoginText}
+            />
+            <TextButton text={authTextKR.SignUpText} />
           </LoginWrapper>
         </CenterMiddleWrapper>
       </FlexFullWrapper>
@@ -57,6 +68,10 @@ const LoginWrapper = styled.div`
   & > .textButton:hover {
     text-decoration: underline;
   }
+
+  & > .findPasswordMessage {
+    margin-bottom: 15px;
+  }
 `;
 
 const ContentTitle = styled.h2`
@@ -71,4 +86,6 @@ const Message = styled.p`
 `;
 const RedMessage = styled.p`
   width: 100%;
+
+  color: ${({ theme }) => theme.color.red};
 `;
