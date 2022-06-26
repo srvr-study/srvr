@@ -25,6 +25,7 @@ export type Theme = {
       md: string;
       sm: string;
       xsm: string;
+      title: string;
     };
     build: ({ family, style, weight, size }: FontProps) => string;
   };
@@ -58,14 +59,17 @@ const fontSizes = {
   md: pixelToRem(22),
   sm: pixelToRem(18),
   xsm: pixelToRem(16),
+  title: pixelToRem(60),
 };
 
 const lightColors = {
-  primary: "#ffffff",
+  primary: "#FFFFFF",
   secondary: "#2D333B",
-  background: "#F4F4F4",
+  background: "#FFFFFF",
+  secondary_background: "#F4F4F4",
   white: "#ffffff",
   placeholder: "#7E7E7E",
+  grey: "#C4C4C4",
   text: "#252525",
   red: "#DB2323",
 };
@@ -76,6 +80,7 @@ const darkColors = {
   background: "#22272E",
   white: "#ffffff",
   placeholder: "#7E7E7E",
+  grey: "#C4C4C4",
   text: "#252525",
   red: "#DB2323",
 };

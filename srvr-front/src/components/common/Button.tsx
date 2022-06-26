@@ -56,3 +56,68 @@ const IconButtonWrapper = styled.button<{ title?: string }>`
       }
     `}
 `;
+
+type TextButtonProps = {
+  text: string;
+  onClick?: MouseEventHandler;
+};
+
+interface TextButtonBoxProps extends TextButtonProps {
+  width: string;
+  height: string;
+}
+
+export function TextButtonBox({
+  text,
+  onClick,
+  width,
+  height,
+}: TextButtonBoxProps): JSX.Element {
+  return (
+    <TextButtonBoxWrapper
+      className="textButtonBox"
+      onClick={onClick}
+      width={width}
+      height={height}
+    >
+      {text}
+    </TextButtonBoxWrapper>
+  );
+}
+
+const TextButtonBoxWrapper = styled.button<{ width: string; height: string }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  background-color: ${({ theme }) => theme.color.secondary};
+
+  ${({ theme }) => theme.font.build({ size: theme.font.size.lg })}
+  color: ${({ theme }) => theme.color.primary};
+
+  ${({ width, height }) =>
+    css`
+      width: ${width};
+      height: ${height};
+    `}
+`;
+
+export function TextButton({ text, onClick }: TextButtonProps): JSX.Element {
+  return (
+    <TextButtonWrapper className="textButton" onClick={onClick}>
+      {text}
+    </TextButtonWrapper>
+  );
+}
+
+const TextButtonWrapper = styled.button`
+  outline: none;
+
+  background: none;
+
+  ${({ theme }) => theme.font.build({ size: theme.font.size.sm })}
+  color: ${({ theme }) => theme.color.secondary};
+`;

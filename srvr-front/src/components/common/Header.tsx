@@ -47,6 +47,8 @@ const HeaderContainer = styled.div`
 
   transition: 0.5s;
 
+  z-index: 10;
+
   & button:first-of-type {
     margin-right: 30px;
   }

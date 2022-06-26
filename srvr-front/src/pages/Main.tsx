@@ -58,9 +58,11 @@ export default function Main(): JSX.Element {
 
 const FeatureServerWrapper = styled.div`
   display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+
   width: 100%;
-  min-height: calc(100% - 90px);
   padding: 55px 20px 0 45px;
 
-  flex-wrap: wrap;
+  background: ${({ theme }) => theme.color.secondary_background};
 `;
