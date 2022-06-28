@@ -22,10 +22,10 @@ export default function FeatureServerBox({
 }: Props): JSX.Element {
   return (
     <FeatureServerBoxContainer isActive={isActive} disabled={!isActive}>
+      <Title>{title}</Title>
       {!isActive && (
         <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
       )}
-      <Title>{title}</Title>
       {isNeedAuth && <NeedAuth>{mainTextKR.FeatureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );

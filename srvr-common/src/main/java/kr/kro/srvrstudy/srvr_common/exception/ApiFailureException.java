@@ -10,6 +10,12 @@ public class ApiFailureException extends RuntimeException {
     private final ErrorCode errorCode;
 
     public ApiFailureException(ErrorCode errorCode) {
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
+    }
+
+    public ApiFailureException(ErrorCode errorCode, Throwable cause) {
+        super(errorCode.getMessage(), cause);
         this.errorCode = errorCode;
     }
 }
