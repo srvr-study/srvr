@@ -1,4 +1,4 @@
-package kr.kro.srvrstudy.srvr_main.helper;
+package kr.kro.srvrstudy.srvr_common.helper;
 
 import kr.kro.srvrstudy.srvr_common.exception.ApiFailureException;
 import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;

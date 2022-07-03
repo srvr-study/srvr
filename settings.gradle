@@ -2,3 +2,5 @@ rootProject.name = 'srvr'
 include 'srvr-main'
 include 'srvr-common'
 include 'clients:srvr-main-client'
+include 'srvr-auth'
+

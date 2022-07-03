@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.validation.constraints.NotNull;
 
-@ConfigurationProperties (prefix = "srvr.server.main")
+@ConfigurationProperties(prefix = "srvr.server.main")
 @Getter
 @Setter
 public class MainServerClientProperties {

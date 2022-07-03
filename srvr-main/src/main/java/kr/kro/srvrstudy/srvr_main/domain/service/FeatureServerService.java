@@ -5,7 +5,7 @@ import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
 import kr.kro.srvrstudy.srvr_common.helper.IdGenerator;
 import kr.kro.srvrstudy.srvr_main.domain.model.FeatureServer;
 import kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerRequest;
-import kr.kro.srvrstudy.srvr_main.helper.Validator;
+import kr.kro.srvrstudy.srvr_common.helper.Validator;
 import kr.kro.srvrstudy.srvr_main.persist.entity.FeatureServerEntity;
 import kr.kro.srvrstudy.srvr_main.persist.repository.FeatureServerRepository;
 import kr.kro.srvrstudy.srvr_main.persist.repository.FeatureServerStompRepository;
