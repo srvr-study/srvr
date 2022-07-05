@@ -1,8 +1,9 @@
 package kr.kro.srvrstudy.srvr_auth.domain.service;
 
-import kr.kro.srvrstudy.srvr_common.dto.auth.UserDTO;
+import kr.kro.srvrstudy.srvr_auth.common.encryption.SHA256;
 import kr.kro.srvrstudy.srvr_auth.persist.entity.UserEntity;
 import kr.kro.srvrstudy.srvr_auth.persist.repository.UserRepository;
+import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
 import kr.kro.srvrstudy.srvr_common.helper.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void join(UserDTO.JoinReq req) {
+    public void join(JoinDTO.Req req) {
         Validator.validateEmpty(req.getUsername(), userRepository::findById);
+        Validator.validateEmpty(req.getEmail(), userRepository::findUserEntityByEmail);
 
-        UserEntity user = new UserEntity(req);
+        JoinDTO.Req encryptReq = req.encryptPassword(SHA256.encrypt(req.getPassword(), req.getUsername()));
+        UserEntity user = new UserEntity(encryptReq);
+
         userRepository.save(user);
     }
 

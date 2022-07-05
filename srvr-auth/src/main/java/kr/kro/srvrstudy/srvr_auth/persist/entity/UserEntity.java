@@ -1,17 +1,12 @@
 package kr.kro.srvrstudy.srvr_auth.persist.entity;
 
-import kr.kro.srvrstudy.srvr_common.dto.auth.UserDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -26,19 +21,22 @@ public class UserEntity {
 
     @Id
     @Size(min = 4, max = 16)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Size(min = 4, max = 16)
     @NotBlank
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @CreatedDate
     private LocalDateTime createdAt;
 
-    public UserEntity(UserDTO.JoinReq req) {
+    public UserEntity(JoinDTO.Req req) {
         username = req.getUsername();
         password = req.getPassword();
         email = req.getEmail();
