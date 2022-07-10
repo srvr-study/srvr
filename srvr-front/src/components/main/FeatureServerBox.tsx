@@ -1,6 +1,7 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, ThemeProps } from "styled-components";
 import { mainTextKR } from "@constants/text";
+import { Theme } from "@constants/theme";
 
 export type FeatureServerType = {
   name: string;
@@ -34,7 +35,7 @@ export default function FeatureServerBox({
 const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   position: relative;
 
-  ${({ theme }) => theme.display.flexCenterColumn}
+  ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenterColumn}
 
   width: 200px;
   height: 200px;
@@ -42,7 +43,7 @@ const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   margin: 0 30px 30px 0;
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
 
-  background: ${({ theme }) => theme.color.primary};
+  background: ${({ theme }: ThemeProps<Theme>) => theme.color.foreground};
 
   transition: 0.5s;
 
@@ -52,9 +53,7 @@ const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
     transform: translateY(-5px);
   }
 
-  ${({ isActive }) =>
-    !isActive &&
-    css`
+  ${({ isActive }) => !isActive && css`
       opacity: 0.5;
 
       &:hover {
@@ -71,21 +70,21 @@ const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
 `;
 
 const NonActive = styled.span`
-  ${({ theme }) => theme.font.build({ weight: 700, size: theme.font.size.sm })}
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ weight: "700", size: theme.font.size.content.sm })}
 
-  color: ${({ theme }) => theme.color.placeholder};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.placeholder};
 `;
 
 const Title = styled.span`
   margin: 10px 0;
 
-  ${({ theme }) => theme.font.build({ size: theme.font.size.lg })}
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.lg })}
 
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.secondary};
 `;
 
 const NeedAuth = styled.span`
-  ${({ theme }) => theme.font.build({ size: theme.font.size.xsm })}
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.xsm })}
 
-  color: ${({ theme }) => theme.color.red};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.red};
 `;

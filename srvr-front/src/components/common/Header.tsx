@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { ThemeProps } from "styled-components";
 import documentDark from "@assets/icons/document-dark.svg";
 import documentLight from "@assets/icons/document-light.svg";
 import homeDark from "@assets/icons/home-dark.svg";
 import homeLight from "@assets/icons/home-light.svg";
 import { IconButton } from "@components/common/Button";
 import { commonTextKR } from "@constants/text";
-import { lightTheme } from "@constants/theme";
+import { lightTheme, Theme } from "@constants/theme";
 import { ThemeContext } from "@providers/ThemeProvider";
 
 export function DefaultHeader(): JSX.Element {
@@ -39,7 +39,8 @@ const HeaderContainer = styled.div`
   padding: 0 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
 
-  background: ${({ theme }) => theme.color.primary};
+  background: ${({ theme }: ThemeProps<Theme>) => theme.color.foreground};
+  z-index: 100;
 
   transition: 0.5s;
 
@@ -51,9 +52,9 @@ const HeaderContainer = styled.div`
 const PageTitle = styled.h2`
   height: 30px;
 
-  ${({ theme }) => theme.font.build({ size: theme.font.size.lg })}
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.lg })}
 
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.secondary};
 `;
 
 const FlexRightWrapper = styled.div`
