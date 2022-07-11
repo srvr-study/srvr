@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { ThemeProps } from "styled-components";
 import moon from "@assets/icons/moon-dark.svg";
 import sun from "@assets/icons/sun-light.svg";
 import { IconButton } from "@components/common/Button";
 import { DefaultHeader } from "@components/common/Header";
 import { errorKR } from "@constants/text";
-import { lightTheme } from "@constants/theme";
+import { lightTheme, Theme } from "@constants/theme";
 import { ThemeContext } from "@providers/ThemeProvider";
 
 type Props = {
@@ -41,10 +41,12 @@ export function DefaultPageTemplate({ children }: Props): JSX.Element {
 }
 
 const TemplateContainder = styled.div`
+  ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenterColumn}
+
   width: 100%;
   min-height: 100%;
 
-  background: ${({ theme }) => theme.color.background};
+  background: ${({ theme }: ThemeProps<Theme>) => theme.color.background};
 
   transition: 0.5s;
 `;
@@ -55,14 +57,14 @@ const FloatingContainer = styled.div`
   right: 60px;
 
   & > button {
-    ${({ theme }) => theme.display.flexCenter}
+    ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenter}
 
     width: 60px;
     height: 60px;
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    background: ${({ theme }) => theme.color.primary};
+    background: ${({ theme }: ThemeProps<Theme>) => theme.color.foreground};
 
     transition: 0.5s;
   }

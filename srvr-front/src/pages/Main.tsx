@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-// import { fetchFeatureServers } from "@apis/mainApiFake";
-import { fetchFeatureServers } from "@apis/mainApi";
+import styled, { ThemeProps } from "styled-components";
+import { fetchFeatureServers } from "@apis/mainApiFake";
+// import { fetchFeatureServers } from "@apis/mainApi";
 import FeatureServerBox, {
   FeatureServerType,
 } from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
 import useStompClient from "@/hooks/useStompClient";
+import { Theme } from "@constants/theme";
 
 export default function Main(): JSX.Element {
   const [featureServersMap, setFeatureServersMap] = useState<
@@ -57,9 +58,13 @@ export default function Main(): JSX.Element {
 
 const FeatureServerWrapper = styled.div`
   display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  
   width: 100%;
-  min-height: calc(100% - 90px);
   padding: 55px 20px 0 45px;
 
-  flex-wrap: wrap;
+  background: ${({ theme }: ThemeProps<Theme>) => theme.color.subground};
+
+  transition: 0.5s;
 `;

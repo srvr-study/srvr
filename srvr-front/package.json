@@ -3,7 +3,6 @@
   "version": "0.0.1-SNAPSHOT",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.3",
     "@stomp/stompjs": "^6.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,12 +23,18 @@
     "@types/react-dom": "^17.0.11",
     "@types/sockjs-client": "^1.5.1",
     "@types/stompjs": "^2.3.5",
-    "@types/styled-components": "^5.1.18"
+    "@types/styled-components": "^5.1.18",
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.2.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-app-rewired start",
+    "start:dev": "env-cmd -f .env.development react-app-rewired start",
+    "start:production": "env-cmd -f .env.production react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build:dev": "env-cmd -f .env.development react-app-rewired build",
+    "build:production": "env-cmd -f .env.production react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

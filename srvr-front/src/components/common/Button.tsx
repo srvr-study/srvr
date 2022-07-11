@@ -1,5 +1,6 @@
+import { Theme } from "@constants/theme";
 import React, { MouseEventHandler } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, ThemeProps } from "styled-components";
 
 type Props = {
   src: string;
@@ -19,11 +20,9 @@ export function IconButton({ src, onClick, alt, title }: Props): JSX.Element {
 const IconButtonWrapper = styled.button<{ title?: string }>`
   position: relative;
 
-  ${({ theme }) => theme.display.flexCenterColumn}
+  ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenterColumn}
 
-  ${({ title }) =>
-    title &&
-    css`
+  ${({ title }) => title && css`
       & > img {
         position: relative;
         transform: translateY(0px);
@@ -42,10 +41,9 @@ const IconButtonWrapper = styled.button<{ title?: string }>`
 
         content: "${title}";
 
-        ${({ theme }) =>
-          theme.font.build({ weight: 700, size: theme.font.size.xsm })}
+        ${({ theme }: ThemeProps<Theme>) => theme.font.build({ weight: "700", size: theme.font.size.content.xsm })}
 
-        color: ${({ theme }) => theme.color.secondary};
+        color: ${({ theme }: ThemeProps<Theme>) => theme.color.secondary};
 
         opacity: 0;
       }

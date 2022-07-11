@@ -1,18 +1,40 @@
 type FontProps = {
-  family: string;
-  style: string;
-  weight: string;
-  size: string;
+  family?: string;
+  style?: string;
+  weight?: string;
+  size?: string;
 };
 
-type Color = {
+type CommonColor = {
+  red: string;
+  grey: string;
+}
+
+interface Color extends CommonColor {
+  background: string;
+  subground: string;
+  foreground: string;
+  dimmed: string;
   primary: string;
   secondary: string;
-  background: string;
-  white: string;
+  textPrimary: string;
+  textSecondary: string;
   placeholder: string;
-  text: string;
+  border: string;
 };
+
+type Size = {
+  xlg: string;
+  lg: string;
+  md: string;
+  sm: string;
+  xsm?: string;
+}
+
+type Display = {
+  flexCenter: string,
+  flexCenterColumn: string
+}
 
 export type Theme = {
   font: {
@@ -20,16 +42,13 @@ export type Theme = {
       kr: string;
     };
     size: {
-      xlg: string;
-      lg: string;
-      md: string;
-      sm: string;
-      xsm: string;
+      title: Size,
+      content: Size,
     };
     build: ({ family, style, weight, size }: FontProps) => string;
   };
   color: Color;
-  display: any;
+  display: Display;
 };
 
 const pixelToRem = (size: number) => `${size / 16}rem`;
@@ -38,7 +57,7 @@ const fontBuild = ({
   family = fontFamilies.kr,
   style = "normal",
   weight = "normal",
-  size = fontSizes.md,
+  size = fontSizes.content.md,
 }: FontProps) => {
   return `
     font-family: ${family};
@@ -53,31 +72,52 @@ const fontFamilies = {
 };
 
 const fontSizes = {
-  xlg: pixelToRem(30),
-  lg: pixelToRem(26),
-  md: pixelToRem(22),
-  sm: pixelToRem(18),
-  xsm: pixelToRem(16),
+  title: {
+    xlg: pixelToRem(60),
+    lg: pixelToRem(48),
+    md: pixelToRem(40),
+    sm: pixelToRem(32),
+  },
+  content: {
+    xlg: pixelToRem(30),
+    lg: pixelToRem(26),
+    md: pixelToRem(22),
+    sm: pixelToRem(18),
+    xsm: pixelToRem(16),
+  }
 };
 
-const lightColors = {
-  primary: "#ffffff",
-  secondary: "#2D333B",
-  background: "#F4F4F4",
-  white: "#ffffff",
-  placeholder: "#7E7E7E",
-  text: "#252525",
+const commonColor = {
   red: "#DB2323",
-};
+  grey: "#F4F4F4"
+}
 
-const darkColors = {
+const lightColors: Color = {
+  ...commonColor,
+  background: "#FFFFFF",
+  subground: "#F4F4F4",
+  foreground: "#FFFFFF",
+  dimmed: "X",
   primary: "#2D333B",
-  secondary: "#ffffff",
-  background: "#22272E",
-  white: "#ffffff",
+  secondary: "X",
+  textPrimary: "#000000",
+  textSecondary: "#FFFFFF",
   placeholder: "#7E7E7E",
-  text: "#252525",
-  red: "#DB2323",
+  border: "#909090"
+};
+
+const darkColors: Color = {
+  ...commonColor,
+  background: "#22272E",
+  subground: "#22272E",
+  foreground: "#2D333B",
+  dimmed: "X",
+  primary: "#2753EE",
+  secondary: "#FFFFFF",
+  textPrimary: "#FFFFFF",
+  textSecondary: "#FFFFFF",
+  placeholder: "#7E7E7E",
+  border: "#22272E",
 };
 
 const display = {
