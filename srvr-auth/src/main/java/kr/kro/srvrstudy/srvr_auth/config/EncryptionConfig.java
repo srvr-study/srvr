@@ -12,4 +12,7 @@ public class EncryptionConfig {
     public AES256 aes256(@Value("${srvr.auth.encryption.master-key}") String masterKey) {
         return new AES256(masterKey);
     }
+//
+//    @Bean
+//    public Password
 }

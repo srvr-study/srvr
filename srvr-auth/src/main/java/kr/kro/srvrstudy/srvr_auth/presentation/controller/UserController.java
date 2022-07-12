@@ -8,10 +8,7 @@ import kr.kro.srvrstudy.srvr_common.dto.LoginDTO;
 import kr.kro.srvrstudy.srvr_common.spec.AuthSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -42,5 +39,13 @@ public class UserController implements AuthSpec {
     @PostMapping("/logout")
     public ApiResponse<Void> logout() {
         return null;
+    }
+
+    @Override
+    @PostMapping("/{username}/check")
+    public ApiResponse<Void> checkUsernameDuplicate(@PathVariable String username) {
+        log.info("[auth] checkUsernameDuplicate {}", username);
+        userService.checkUsernameDuplicate(username);
+        return new SuccessResponse<>();
     }
 }

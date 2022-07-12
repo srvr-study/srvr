@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Size(min = 4, max = 16)
+    @Size(min = 44, max = 44)
     @NotBlank
     @Column(name = "password", nullable = false)
     private String password;

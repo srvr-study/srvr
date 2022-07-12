@@ -30,6 +30,7 @@ export default function FeatureServerBox({
       disabled={!isActive}
       onClick={() => (window.location.href = path)}
     >
+      <Title>{title}</Title>
       {!isActive && (
         <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
       )}
@@ -37,6 +38,8 @@ export default function FeatureServerBox({
     </FeatureServerBoxContainer>
   );
 }
+
+
 
 const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   position: relative;

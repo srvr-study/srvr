@@ -7,7 +7,7 @@ export const fetchFeatureServers = () => {
             {
               name: "Spring JWT Auth Server",
               isActive: true,
-              path: "/auth",
+              path: "/auth/login",
             },
             {
               name: "Spring Chatting Server",

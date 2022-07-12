@@ -1,4 +1,4 @@
-### local Database 세팅 하는 방법
+### local Database, redis 세팅 하는 방법
 
 1. docker desktop install
    * [mac](https://docs.docker.com/desktop/mac/install/)

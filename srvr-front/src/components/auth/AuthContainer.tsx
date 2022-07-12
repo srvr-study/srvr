@@ -46,7 +46,7 @@ export function AuthContainer({ type }: Props): JSX.Element {
   };
 
   const join = async () => {
-    const _res = await joinApi({ username, email, password, repassword });
+    const _res = await joinApi({ username, email, password });
   };
 
   const joinPage = async () => {
