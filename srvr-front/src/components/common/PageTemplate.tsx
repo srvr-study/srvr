@@ -33,7 +33,9 @@ export function DefaultPageTemplate({
   return (
     <TemplateContainer>
       <DefaultHeader headerText={headerText} />
-      {children}
+      <ContentContainer>
+        {children}
+      </ContentContainer>
       <FloatingContainer>
         <IconButton
           src={theme === lightTheme ? moon : sun}
@@ -54,6 +56,13 @@ const TemplateContainer = styled.div`
 
   transition: 0.5s;
 `;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+
+  width: 100%;
+`
 
 const FloatingContainer = styled.div`
   position: fixed;

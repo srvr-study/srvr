@@ -60,8 +60,8 @@ export default function Main(): JSX.Element {
 
 const FeatureServerWrapper = styled.div`
   display: flex;
-  flex-grow: 1;
   flex-wrap: wrap;
+  align-content: baseline;
   
   width: 100%;
   padding: 55px 20px 0 45px;
