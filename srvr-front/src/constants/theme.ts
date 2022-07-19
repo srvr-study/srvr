@@ -7,7 +7,8 @@ type FontProps = {
 
 type CommonColor = {
   red: string;
-  grey: string;
+  gray: string;
+  darkGray: string;
 }
 
 interface Color extends CommonColor {
@@ -89,7 +90,8 @@ const fontSizes = {
 
 const commonColor = {
   red: "#DB2323",
-  grey: "#F4F4F4"
+  gray: "#F4F4F4",
+  darkGray: "#C4C4C4"
 }
 
 const lightColors: Color = {

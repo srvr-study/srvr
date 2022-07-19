@@ -3,19 +3,25 @@ import ReactDOM from "react-dom";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import "@/index.css";
+
 import reportWebVitals from "@/reportWebVitals";
+import RootProvider from "@providers/RootProvider";
 import Auth from "@pages/Auth";
 import Main from "@pages/Main";
-import RootProvider from "@providers/RootProvider";
+import { SignInBox } from "@components/auth/SignInBox";
+import { SignUpBox } from "@components/auth/SignUpBox";
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <RootProvider>
         <Routes>
-          <Route path="/auth/login" element={<Auth />} />
-          <Route path="/auth/join" element={<Auth />} />
           <Route path="/" element={<Main />} />
+          <Route  path="/auth/*" element={<Auth />} >
+            <Route path="login" element={<SignInBox />} />
+            <Route path="join" element={<SignUpBox />} />
+          </Route>
         </Routes>
       </RootProvider>
     </BrowserRouter>

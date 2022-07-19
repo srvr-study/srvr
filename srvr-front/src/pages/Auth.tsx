@@ -1,31 +1,23 @@
-import { useContext, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import { authTextKR, errorKR } from "@constants/text";
-import { ThemeContext } from "@providers/ThemeProvider";
-import { AuthContainer } from "@components/auth/AuthContainer";
-import styled, {ThemeProps} from "styled-components";
-import {Theme} from "@constants/theme";
+import { authTextKR } from "@constants/text";
 
 export default function Auth(): JSX.Element {
 
   return (
     <DefaultPageTemplate headerText={authTextKR}>
       <AuthWrapper>
-      {window.location.pathname === "/auth/login" ? (
-        <AuthContainer type="signIn" />
-      ) : (
-        <AuthContainer type="signUp" />
-      )}
+        <Outlet />
       </AuthWrapper>
     </DefaultPageTemplate>
   );
-}
+};
 
 const AuthWrapper = styled.div`
   display: flex;
-  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
 
-  background: ${({ theme }: ThemeProps<Theme>) => theme.color.subground};
-
-  transition: 0.5s;
+  width: 100%;
 `;

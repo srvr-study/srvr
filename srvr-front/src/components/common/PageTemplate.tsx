@@ -82,3 +82,10 @@ const FloatingContainer = styled.div`
     transition: 0.5s;
   }
 `;
+
+export const ContentTitle = styled.h1`
+margin-bottom: 45px;
+
+${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.title.xlg })}
+color: ${({ theme }: ThemeProps<Theme>) => theme.color.textPrimary};
+`;
