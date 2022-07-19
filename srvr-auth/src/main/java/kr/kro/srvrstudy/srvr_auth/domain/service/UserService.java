@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserService {
 
+    private final MailService mailService;
     private final UserRepository userRepository;
 
     public void join(JoinDTO.Req req) {
@@ -27,8 +28,11 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void login() {
-
+    public void login(String username, String password) {
+        // todo 1. 세션 존재 여부 확인
+        // todo 2. 세션 존재시 세션 삭제
+        // todo 3. 세션 생성
+        // todo 4. 세션 엔티티 저장 및 redis에 session 저장
     }
 
     public void logout() {
@@ -37,6 +41,12 @@ public class UserService {
 
     public void checkUsernameDuplicate(String username) {
         Validator.validateEmpty(username, userRepository::findById);
+    }
+
+    public boolean sendCodeMail(String email, long ttl) {
+        Validator.validateNotEmpty(email, userRepository::findUserEntityByEmail);
+
+        return mailService.sendCodeMail(email, ttl);
     }
 
 }

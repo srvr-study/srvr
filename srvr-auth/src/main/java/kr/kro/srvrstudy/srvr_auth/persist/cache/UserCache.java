@@ -7,5 +7,5 @@ public class UserCache {
 
     private String username;
     private String session;
-    private String loginedAt;
+    private String lastLoggedInAt;
 }

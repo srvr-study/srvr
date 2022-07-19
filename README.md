@@ -18,3 +18,9 @@
 srvr의 엔트리 페이지를 담당하는 서버. 각각의 기능 서버의 대한 데이터를 담당하고 있습니다. 
 
 * [ERD](https://www.erdcloud.com/d/htMw4QEQwPe8CpwFW)
+
+#### auth
+
+srvr의 인증을 담당 하는 서버. 사용자 정보, 인증, 세션 등을 담당하고 있습니다.
+
+* [ERD](https://www.erdcloud.com/d/TeswQEFEiqpRi6t5s)
