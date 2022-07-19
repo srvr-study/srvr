@@ -9,46 +9,42 @@ import { IconRoundInput } from "@components/common/Input";
 import { ContentTitle } from "@components/common/PageTemplate";
 import { lightTheme, Theme } from "@constants/theme";
 
-import emailDark from "@assets/icons/auth/email-dark.svg";
-import emailLight from "@assets/icons/auth/email-light.svg";
 import passwordDark from "@assets/icons/auth/password-dark.svg";
 import passwordLight from "@assets/icons/auth/password-light.svg";
 
 
-export function FindPasswordBox(): JSX.Element {
+export function SuccessSignInBox(): JSX.Element {
   const { theme } = useContext(ThemeContext);
-  const [email, setEmail] = useState<string>("");
-  const [code, setCode] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [repassword, setRepassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [getCode, setGetCode] = useState<Boolean>(false);
   const navigate = useNavigate();
 
   return (
-    <FindPasswordBoxWrapper width={"460px"}>
-      <ContentTitle>Find Password</ContentTitle>
+    <SuccessSignInBoxWrapper width={"460px"}>
+      <ContentTitle>Reset Password</ContentTitle>
       <IconRoundInput
-        src={theme === lightTheme ? emailLight : emailDark}
-        value={email}
-        placeholder={"E - mail을 입력해주세요."}
-        type="email"
-        onChange={({ target }) => setEmail(target.value)}
-      />
-      {getCode && <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
-        value={code}
-        placeholder={"Code를 입력해주세요."}
-        type="text"
-        onChange={({ target }) => setCode(target.value)}
-      />}
+        value={password}
+        placeholder={"Password을 입력해주세요."}
+        type="password"
+        onChange={({ target }) => setPassword(target.value)}
+      />
+      <IconRoundInput
+        src={theme === lightTheme ? passwordLight : passwordDark}
+        value={repassword}
+        placeholder={"Password을 다시 입력해주세요."}
+        type="password"
+        onChange={({ target }) => setRepassword(target.value)}
+      />
       <ErrorMeeage>{errorMessage}</ErrorMeeage>
-      <TextBoxButton text={getCode ? "코드 다시 받기" : "코드받기"} width={"460px"} onClick={() => { }} />
-      {getCode && <TextBoxButton text={"확인"} width={"460px"} onClick={() => { }} />}
+      <TextBoxButton text={"비밀번호 저장"} width={"460px"} onClick={() => { }} />
       <TextButton text={"돌아가기"} onClick={() => navigate("/auth/login")} />
-    </FindPasswordBoxWrapper>
+    </SuccessSignInBoxWrapper>
   );
 }
 
-const FindPasswordBoxWrapper = styled(AuthBoxWrapper)`
+const SuccessSignInBoxWrapper = styled(AuthBoxWrapper)`
   & .icon-round-input {
     margin-bottom: 30px;
 

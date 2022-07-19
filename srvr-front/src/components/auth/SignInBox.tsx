@@ -33,14 +33,16 @@ export function SignInBox(): JSX.Element {
       <IconRoundInput
         src={theme === lightTheme ? usernameLight : usernameDark}
         value={username}
+        type="text"
         placeholder={"Username을 입력해주세요."}
-        onChange={({target}) => setUsername(target.value)}
+        onChange={({ target }) => setUsername(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
         value={password}
+        type="password"
         placeholder={"Password을 입력해주세요."}
-        onChange={({target}) => setPassword(target.value)}
+        onChange={({ target }) => setPassword(target.value)}
       />
       <FindPasswordWrapper>
         <p>비밀번호를 잃어버렸나요?</p>
@@ -48,8 +50,8 @@ export function SignInBox(): JSX.Element {
       </FindPasswordWrapper>
       <ErrorMessage>Username과 Password을 확인해주세요.</ErrorMessage>
       <OAuthContainer />
-      <TextBoxButton text={"로그인"} width={"460px"} onClick={login}/>
-      <TextButton text={"회원가입"} onClick={() => navigate("/auth/join")}/>
+      <TextBoxButton text={"로그인"} width={"460px"} onClick={login} />
+      <TextButton text={"회원가입"} onClick={() => navigate("/auth/join")} />
     </SignInBoxWrapper>
   );
 }
@@ -71,18 +73,18 @@ const SignInBoxWrapper = styled(AuthBoxWrapper)`
 `;
 
 const FindPasswordWrapper = styled.div`
-  ${({theme}: ThemeProps<Theme>) => theme.display.flexCenter}
+  ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenter}
 
   width: 100%;
   justify-content: left;
 
-  ${({theme}: ThemeProps<Theme>) => theme.font.build({size: theme.font.size.content.md})}
-  color: ${({theme}: ThemeProps<Theme>) => theme.color.textPrimary};
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.md })}
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.textPrimary};
 
   & a {
     margin-left: 5px;
 
-    color: ${({theme}: ThemeProps<Theme>) => theme.color.textPrimary};
+    color: ${({ theme }: ThemeProps<Theme>) => theme.color.textPrimary};
     text-decoration: underline;
   }
 `;
@@ -91,6 +93,6 @@ const ErrorMessage = styled.p`
   width: 100%;
   margin-top: 6px;
 
-  ${({theme}: ThemeProps<Theme>) => theme.font.build({size: theme.font.size.content.md})}
-  color: ${({theme}: ThemeProps<Theme>) => theme.color.red};
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.md })}
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.red};
 `

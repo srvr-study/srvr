@@ -4,6 +4,7 @@ import styled, { ThemeContext, ThemeProps } from "styled-components";
 
 import { AuthBoxWrapper } from "./AuthContainer";
 
+import { joinApi } from "@apis/authApi";
 import { TextBoxButton, TextButton } from "@components/common/Button";
 import { IconRoundInput } from "@components/common/Input";
 import { ContentTitle } from "@components/common/PageTemplate";
@@ -25,6 +26,11 @@ export function SignUpBox(): JSX.Element {
   const [repassword, setRepassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("개인정보 보호 받지 않는 사이트입니다. 주의바랍니다.");
   const navigate = useNavigate();
+
+  const join = async () => {
+    await joinApi({ username, email, password });
+    navigate("/auth/sign");
+  };
 
   return (
     <SignUpWrapper width="460px">
@@ -57,8 +63,8 @@ export function SignUpBox(): JSX.Element {
         onChange={({ target }) => setRepassword(target.value)}
       />
       <ErrorMeeage>{errorMessage}</ErrorMeeage>
-      <TextBoxButton text={"회원가입"} width={"460px"} onClick={() => {}}/>
-      <TextButton text={"돌아가기"} onClick={() => navigate("/auth/login")}/>
+      <TextBoxButton text={"회원가입"} width={"460px"} onClick={join} />
+      <TextButton text={"돌아가기"} onClick={() => navigate("/auth/login")} />
     </SignUpWrapper>
   );
 }
@@ -78,6 +84,6 @@ const ErrorMeeage = styled.p`
   width: 100%;
   margin-top: 6px;
 
-  ${({theme}: ThemeProps<Theme>) => theme.font.build({size: theme.font.size.content.md})}
-  color: ${({theme}: ThemeProps<Theme>) => theme.color.red};
+  ${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.content.md })}
+  color: ${({ theme }: ThemeProps<Theme>) => theme.color.red};
 `;
