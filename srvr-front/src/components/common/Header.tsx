@@ -18,15 +18,15 @@ export function DefaultHeader({
 
   return (
     <HeaderContainer>
-      <PageTitle>{headerText.PageTitle}</PageTitle>
+      <PageTitle>{headerText.pageTitle}</PageTitle>
       <FlexRightWrapper>
         <IconButton
           src={theme === lightTheme ? documentDark : documentLight}
-          title={headerText.HeaderNavItemDocument}
+          title={headerText.headerNavItemDocument}
         />
         <IconButton
           src={theme === lightTheme ? homeDark : homeLight}
-          title={headerText.HeaderNavItemHome}
+          title={headerText.headerNavItemHome}
         />
       </FlexRightWrapper>
     </HeaderContainer>

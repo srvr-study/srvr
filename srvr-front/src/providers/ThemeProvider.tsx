@@ -30,7 +30,7 @@ const reducer = (_: Theme, action: ThemeAction) => {
     case "SET_DARK_THEME":
       return darkTheme;
     default:
-      throw new Error(errorKR.FailedToSetTheme);
+      throw new Error(errorKR.failedToSetTheme);
   }
 };
 

@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import { authTextKR } from "@constants/text";
+import { AuthKR } from "@constants/text";
 
 export default function Auth(): JSX.Element {
 
   return (
-    <DefaultPageTemplate headerText={authTextKR}>
+    <DefaultPageTemplate headerText={AuthKR.headerText}>
       <AuthWrapper>
         <Outlet />
       </AuthWrapper>

@@ -7,7 +7,7 @@ import FeatureServerBox, {
   FeatureServerType,
 } from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import { commonTextKR } from "@constants/text";
+import { MainKR } from "@constants/text";
 import useStompClient from "@/hooks/useStompClient";
 import { Theme } from "@constants/theme";
 
@@ -42,7 +42,7 @@ export default function Main(): JSX.Element {
   }, []);
 
   return (
-    <DefaultPageTemplate headerText={commonTextKR}>
+    <DefaultPageTemplate headerText={MainKR.headerText}>
       <FeatureServerWrapper>
         {Array.from(featureServersMap.values()).map((featureServer) => (
           <FeatureServerBox

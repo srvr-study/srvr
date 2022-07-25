@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css, ThemeProps } from "styled-components";
-import { mainTextKR } from "@constants/text";
+import { MainKR } from "@constants/text";
 import { Theme } from "@constants/theme";
 
 export type FeatureServerType = {
@@ -32,9 +32,9 @@ export default function FeatureServerBox({
     >
       <Title>{title}</Title>
       {!isActive && (
-        <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
+        <NonActive>{MainKR.featureServerText.featureServerBoxIsNotActive}</NonActive>
       )}
-      {isNeedAuth && <NeedAuth>{mainTextKR.FeatureServerBoxNeedAuth}</NeedAuth>}
+      {isNeedAuth && <NeedAuth>{MainKR.featureServerText.featureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );
 }

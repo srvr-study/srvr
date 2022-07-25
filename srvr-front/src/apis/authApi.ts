@@ -1,48 +1,13 @@
-const baseUrl = process.env.REACT_APP_SRVR_AUTH_SERVER_HOST;
-type loginInfo = {
+import { makeAuthUrl, _post } from "./baseApi";
+
+type LoginRequest = {
   username: string;
   password: string;
 };
 
-type joinInfo = loginInfo & {
+interface JoinRequest extends LoginRequest {
   email: string;
 };
 
-export const loginApi = async ({ username, password }: loginInfo) => {
-  const _res = await fetch(
-    "http://localhost:8080/api/v1/user/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    }
-  );
-  const res = await _res.json();
-  console.log(res);
-};
-
-export const joinApi = async ({
-  username,
-  email,
-  password
-}: joinInfo) => {
-  const _res = await fetch(
-    "http://localhost:8080/api/v1/user/join",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password
-      }),
-    }
-  );
-};
+export const loginApi = (loginRequest: LoginRequest) => _post(makeAuthUrl("api/v1/user/login"), { body: JSON.stringify(loginRequest) });
+export const joinApi = (joinRequest: JoinRequest) => _post(makeAuthUrl("api/v1/user/join"), { body: JSON.stringify(joinRequest) });

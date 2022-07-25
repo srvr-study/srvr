@@ -21,7 +21,7 @@ export function DefaultPageTemplate({
 
   const changeTheme = () => {
     if (!themeDispatch) {
-      throw new Error(errorKR.FailedToSetTheme);
+      throw new Error(errorKR.failedToSetTheme);
     }
     if (theme === lightTheme) {
       themeDispatch({ type: "SET_DARK_THEME" });

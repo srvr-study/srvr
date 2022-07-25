@@ -15,12 +15,14 @@ import usernameDark from "@assets/icons/auth/username-dark.svg";
 import usernameLight from "@assets/icons/auth/username-light.svg";
 import passwordDark from "@assets/icons/auth/password-dark.svg";
 import passwordLight from "@assets/icons/auth/password-light.svg";
+import { AuthKR } from "@constants/text";
 
 
 export function SignInBox(): JSX.Element {
   const { theme } = useContext(ThemeContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(AuthKR.signinInText.confirmUsernameAndPasswordMessage);
   const navigate = useNavigate();
 
   const login = async () => {
@@ -34,24 +36,24 @@ export function SignInBox(): JSX.Element {
         src={theme === lightTheme ? usernameLight : usernameDark}
         value={username}
         type="text"
-        placeholder={"Username을 입력해주세요."}
+        placeholder={AuthKR.signinInText.usernamePlaceHolder}
         onChange={({ target }) => setUsername(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
         value={password}
         type="password"
-        placeholder={"Password을 입력해주세요."}
+        placeholder={AuthKR.signinInText.passwordPlaceHolder}
         onChange={({ target }) => setPassword(target.value)}
       />
       <FindPasswordWrapper>
-        <p>비밀번호를 잃어버렸나요?</p>
-        <Link to={"/auth/find-password"}>비밀번호 찾기</Link>
+        <p>{AuthKR.signinInText.findPasswordMessage}</p>
+        <Link to={"/auth/find-password"}>{AuthKR.signinInText.findPasswordText}</Link>
       </FindPasswordWrapper>
-      <ErrorMessage>Username과 Password을 확인해주세요.</ErrorMessage>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
       <OAuthContainer />
-      <TextBoxButton text={"로그인"} width={"460px"} onClick={login} />
-      <TextButton text={"회원가입"} onClick={() => navigate("/auth/join")} />
+      <TextBoxButton text={AuthKR.signinInText.loginText} width={"460px"} onClick={login} />
+      <TextButton text={AuthKR.signinInText.joinText} onClick={() => navigate("/auth/join")} />
     </SignInBoxWrapper>
   );
 }
