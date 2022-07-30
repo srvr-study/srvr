@@ -8,13 +8,16 @@ import { IconButton } from "@components/common/Button";
 import { lightTheme, Theme } from "@constants/theme";
 import { HeaderText } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
+import { useNavigate } from "react-router-dom";
 
-export function DefaultHeader({
-  headerText,
-}: {
+type HeaderProps = {
   headerText: HeaderText;
-}): JSX.Element {
+  documentUrl: string;
+}
+
+export function DefaultHeader({headerText, documentUrl}: HeaderProps): JSX.Element {
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   return (
     <HeaderContainer>
@@ -23,10 +26,12 @@ export function DefaultHeader({
         <IconButton
           src={theme === lightTheme ? documentDark : documentLight}
           title={headerText.headerNavItemDocument}
+          onClick={() => navigate(documentUrl)}
         />
         <IconButton
           src={theme === lightTheme ? homeDark : homeLight}
           title={headerText.headerNavItemHome}
+          onClick={() => navigate("/")}
         />
       </FlexRightWrapper>
     </HeaderContainer>

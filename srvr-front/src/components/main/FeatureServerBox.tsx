@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css, ThemeProps } from "styled-components";
-import { MainKR } from "@constants/text";
+
 import { Theme } from "@constants/theme";
+import { I18nContext } from "@providers/I18nProvider";
+
 
 export type FeatureServerType = {
   name: string;
@@ -24,6 +26,8 @@ export default function FeatureServerBox({
   isNeedAuth = false,
   path,
 }: Props): JSX.Element {
+  const mainText = useContext(I18nContext).i18n.main;
+
   return (
     <FeatureServerBoxContainer
       isActive={isActive}
@@ -32,9 +36,9 @@ export default function FeatureServerBox({
     >
       <Title>{title}</Title>
       {!isActive && (
-        <NonActive>{MainKR.featureServerText.featureServerBoxIsNotActive}</NonActive>
+        <NonActive>{mainText.featureServerText.featureServerBoxIsNotActive}</NonActive>
       )}
-      {isNeedAuth && <NeedAuth>{MainKR.featureServerText.featureServerBoxNeedAuth}</NeedAuth>}
+      {isNeedAuth && <NeedAuth>{mainText.featureServerText.featureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );
 }

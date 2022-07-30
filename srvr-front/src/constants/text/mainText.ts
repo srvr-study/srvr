@@ -27,3 +27,21 @@ export const MainKR = function (): MainText {
     featureServerText: featureServerText,
   }
 }();
+
+export const MainEN = function (): MainText {
+  const headerText: HeaderText = Object.freeze({
+    pageTitle: "Spring Portfolio Project",
+    headerNavItemDocument: "Document",
+    headerNavItemHome: "Home",
+  });
+
+  const featureServerText: FeatureServerText = Object.freeze({
+    featureServerBoxIsNotActive: "Developing...",
+    featureServerBoxNeedAuth: "Authentication must be first.",
+  });
+
+  return {
+    headerText: headerText,
+    featureServerText: featureServerText,
+  }
+}();

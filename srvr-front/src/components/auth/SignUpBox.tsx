@@ -9,7 +9,7 @@ import { TextBoxButton, TextButton } from "@components/common/Button";
 import { IconRoundInput } from "@components/common/Input";
 import { ContentTitle } from "@components/common/PageTemplate";
 import { lightTheme, Theme } from "@constants/theme";
-import { AuthKR } from "@constants/text";
+import { I18nContext } from "@providers/I18nProvider";
 
 import usernameDark from "@assets/icons/auth/username-dark.svg";
 import usernameLight from "@assets/icons/auth/username-light.svg";
@@ -21,11 +21,13 @@ import passwordLight from "@assets/icons/auth/password-light.svg";
 
 export function SignUpBox(): JSX.Element {
   const { theme } = useContext(ThemeContext);
+  const authText = useContext(I18nContext).i18n.auth;
+  
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(AuthKR.signUpText.siteCautionMessage);
+  const [errorMessage, setErrorMessage] = useState(authText.signUpText.siteCautionMessage);
   const navigate = useNavigate();
 
   const join = async () => {
@@ -44,33 +46,33 @@ export function SignUpBox(): JSX.Element {
       <IconRoundInput
         src={theme === lightTheme ? usernameLight : usernameDark}
         value={username}
-        placeholder={AuthKR.signUpText.usernamePlaceHolder}
+        placeholder={authText.signUpText.usernamePlaceHolder}
         onChange={({ target }) => setUsername(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? emailLight : emailDark}
         value={email}
-        placeholder={AuthKR.signUpText.emailPlaceHolder}
+        placeholder={authText.signUpText.emailPlaceHolder}
         type="email"
         onChange={({ target }) => setEmail(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
         value={password}
-        placeholder={AuthKR.signUpText.passwordPlaceHolder}
+        placeholder={authText.signUpText.passwordPlaceHolder}
         type="password"
         onChange={({ target }) => setPassword(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
         value={repassword}
-        placeholder={AuthKR.signUpText.repasswordPlaceHodler}
+        placeholder={authText.signUpText.repasswordPlaceHodler}
         type="password"
         onChange={({ target }) => setRepassword(target.value)}
       />
       <ErrorMeeage>{errorMessage}</ErrorMeeage>
-      <TextBoxButton text={AuthKR.signUpText.joinText} width={"460px"} onClick={join} />
-      <TextButton text={AuthKR.signUpText.backText} onClick={() => navigate("/auth/login")} />
+      <TextBoxButton text={authText.signUpText.joinText} width={"460px"} onClick={join} />
+      <TextButton text={authText.signUpText.backText} onClick={() => navigate("/auth/login")} />
     </SignUpWrapper>
   );
 }

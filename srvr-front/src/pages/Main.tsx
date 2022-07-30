@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeProps } from "styled-components";
+
+import useStompClient from "@/hooks/useStompClient";
 import { fetchFeatureServers } from "@apis/mainApiFake";
 // import { fetchFeatureServers } from "@apis/mainApi";
-import FeatureServerBox, {
-  FeatureServerType,
-} from "@components/main/FeatureServerBox";
+import FeatureServerBox, { FeatureServerType} from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import { MainKR } from "@constants/text";
-import useStompClient from "@/hooks/useStompClient";
 import { Theme } from "@constants/theme";
+import { I18nContext } from "@providers/I18nProvider";
+
 
 export default function Main(): JSX.Element {
   const [featureServersMap, setFeatureServersMap] = useState<
     Map<String, FeatureServerType>
   >(new Map());
-
+  const mainText = useContext(I18nContext).i18n.main;
   const { subscribe } = useStompClient();
 
   function renderFeatureServer(data: any) {
@@ -42,7 +42,7 @@ export default function Main(): JSX.Element {
   }, []);
 
   return (
-    <DefaultPageTemplate headerText={MainKR.headerText}>
+    <DefaultPageTemplate headerText={mainText.headerText} documentUrl="/document">
       <FeatureServerWrapper>
         {Array.from(featureServersMap.values()).map((featureServer) => (
           <FeatureServerBox

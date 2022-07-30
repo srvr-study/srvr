@@ -15,14 +15,16 @@ import usernameDark from "@assets/icons/auth/username-dark.svg";
 import usernameLight from "@assets/icons/auth/username-light.svg";
 import passwordDark from "@assets/icons/auth/password-dark.svg";
 import passwordLight from "@assets/icons/auth/password-light.svg";
-import { AuthKR } from "@constants/text";
+import { I18nContext } from "@providers/I18nProvider";
 
 
 export function SignInBox(): JSX.Element {
   const { theme } = useContext(ThemeContext);
+  const authText = useContext(I18nContext).i18n.auth;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(AuthKR.signinInText.confirmUsernameAndPasswordMessage);
+  const [errorMessage, setErrorMessage] = useState(authText.signinInText.confirmUsernameAndPasswordMessage);
   const navigate = useNavigate();
 
   const login = async () => {
@@ -40,24 +42,24 @@ export function SignInBox(): JSX.Element {
         src={theme === lightTheme ? usernameLight : usernameDark}
         value={username}
         type="text"
-        placeholder={AuthKR.signinInText.usernamePlaceHolder}
+        placeholder={authText.signinInText.usernamePlaceHolder}
         onChange={({ target }) => setUsername(target.value)}
       />
       <IconRoundInput
         src={theme === lightTheme ? passwordLight : passwordDark}
         value={password}
         type="password"
-        placeholder={AuthKR.signinInText.passwordPlaceHolder}
+        placeholder={authText.signinInText.passwordPlaceHolder}
         onChange={({ target }) => setPassword(target.value)}
       />
       <FindPasswordWrapper>
-        <p>{AuthKR.signinInText.findPasswordMessage}</p>
-        <Link to={"/auth/find-password"}>{AuthKR.signinInText.findPasswordText}</Link>
+        <p>{authText.signinInText.findPasswordMessage}</p>
+        <Link to={"/auth/find-password"}>{authText.signinInText.findPasswordText}</Link>
       </FindPasswordWrapper>
       <ErrorMessage>{errorMessage}</ErrorMessage>
       <OAuthContainer />
-      <TextBoxButton text={AuthKR.signinInText.loginText} width={"460px"} onClick={login} />
-      <TextButton text={AuthKR.signinInText.joinText} onClick={() => navigate("/auth/join")} />
+      <TextBoxButton text={authText.signinInText.loginText} width={"460px"} onClick={login} />
+      <TextButton text={authText.signinInText.joinText} onClick={() => navigate("/auth/join")} />
     </SignInBoxWrapper>
   );
 }

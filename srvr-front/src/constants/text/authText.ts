@@ -59,3 +59,37 @@ export const AuthKR = function (): AuthText {
     signUpText: signUpText,
   }
 }();
+
+export const AuthEN = function (): AuthText {
+  const headerText: HeaderText = Object.freeze({
+    pageTitle: "Spring JWT Auth",
+    headerNavItemDocument: "Document",
+    headerNavItemHome: "Home",
+  });
+
+  const signinInText: SignInInText = {
+    usernamePlaceHolder: "Please enter Username.",
+    passwordPlaceHolder: "Please enter Password.",
+    findPasswordMessage: "Did you lose your password?",
+    findPasswordText: "Find Password",
+    confirmUsernameAndPasswordMessage: "Please check Username and Password.",
+    loginText: "Sign In",
+    joinText: "Sign Up",
+  }
+
+  const signUpText: SignUpText = {
+    usernamePlaceHolder: "Please enter Username.",
+    emailPlaceHolder: "Please enter E - mail.",
+    passwordPlaceHolder: "Please enter Password.",
+    repasswordPlaceHodler: "Please enter Repassword.",
+    joinText: "Sign Up",
+    backText: "Back",
+    siteCautionMessage: "It is a study website that does not protect your personal information. Please be careful of sign up.",
+  }
+
+  return {
+    headerText: headerText,
+    signinInText: signinInText,
+    signUpText: signUpText,
+  }
+}();

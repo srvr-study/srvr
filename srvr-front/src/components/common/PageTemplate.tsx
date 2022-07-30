@@ -5,17 +5,20 @@ import sun from "@assets/icons/sun-light.svg";
 import { IconButton } from "@components/common/Button";
 import { DefaultHeader } from "@components/common/Header";
 import { lightTheme, Theme } from "@constants/theme";
-import { HeaderText, errorKR } from "@constants/text";
+import { HeaderText } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
+import { errorKR } from "@constants/text/commonText";
 
 type Props = {
   children: React.ReactNode;
   headerText: HeaderText;
+  documentUrl: string;
 };
 
 export function DefaultPageTemplate({
   children,
   headerText,
+  documentUrl
 }: Props): JSX.Element {
   const { theme, themeDispatch } = useContext(ThemeContext);
 
@@ -32,7 +35,7 @@ export function DefaultPageTemplate({
 
   return (
     <TemplateContainer>
-      <DefaultHeader headerText={headerText} />
+      <DefaultHeader headerText={headerText} documentUrl={documentUrl} />
       <ContentContainer>
         {children}
       </ContentContainer>
