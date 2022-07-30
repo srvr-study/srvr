@@ -1,5 +1,6 @@
 package kr.kro.srvrstudy.srvr_auth.persist.entity;
 
+import kr.kro.srvrstudy.srvr_auth.persist.entity.converter.UserRoleConverter;
 import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,10 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "role", nullable = false)
+    @Convert(converter = UserRoleConverter.class)
+    private UserRole role;
+
     @Pattern(regexp = "^\\w+@\\w+\\.\\w+(\\.\\w+)?")
     @Column(name = "email", nullable = false)
     private String email;
@@ -40,5 +45,6 @@ public class UserEntity {
         username = req.getUsername();
         password = req.getPassword();
         email = req.getEmail();
+        role = UserRole.from(req.getRole());
     }
 }

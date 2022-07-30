@@ -4,6 +4,7 @@ CREATE TABLE user
 (
     `username`      VARCHAR(16)  NOT NULL,
     `password`      VARCHAR(44)  NOT NULL,
+    `role`          VARCHAR(20)  NOT NULL,
     `email`         VARCHAR(30)  NOT NULL,
     `created_at`    DATETIME(6)  NOT NULL,
     PRIMARY KEY (username),

@@ -3,6 +3,7 @@ package kr.kro.srvrstudy.srvr_main.presentation.controller.auth;
 import kr.kro.srvrstudy.srvr_common.api.response.ApiResponse;
 import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
 import kr.kro.srvrstudy.srvr_common.dto.LoginDTO;
+import kr.kro.srvrstudy.srvr_main.domain.model.auth.FindPasswordDTO;
 import kr.kro.srvrstudy.srvr_main.domain.service.auth.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,4 +40,11 @@ public class UserController {
         log.info("main: requestSendCodeMail {}", email);
         return userService.requestSendCodeMail(email);
     }
+
+    @PostMapping("/password-code-check")
+    public ApiResponse<String> checkFindPasswordCode(@RequestBody FindPasswordDTO.Req req) {
+        log.info("main: checkFindPasswordCode {}", req);
+        return userService.checkFindPasswordCode(req);
+    }
+
 }

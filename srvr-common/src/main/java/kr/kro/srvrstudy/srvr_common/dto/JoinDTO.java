@@ -6,6 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class JoinDTO {
+    private JoinDTO() {
+        throw new AssertionError("JoinDTO objects cannot be initiate");
+    }
 
     @Getter
     @Setter
@@ -16,15 +19,17 @@ public class JoinDTO {
         private String username;
         private String email;
         private String password;
+        private String role;
 
-        public Req(String username, String email, String password) {
+        public Req(String username, String email, String password, String role) {
             this.username = username;
             this.email = email;
             this.password = password;
+            this.role = role;
         }
 
         public Req encryptPassword(String encryptedPassword) {
-            return new Req(this.username, this.email, encryptedPassword);
+            return new Req(this.username, this.email, encryptedPassword, this.role);
         }
     }
 }

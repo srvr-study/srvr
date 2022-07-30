@@ -3,25 +3,32 @@ package kr.kro.srvrstudy.srvr_main.domain.service.auth;
 import kr.kro.srvrstudy.srvr_common.api.response.ApiResponse;
 import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
 import kr.kro.srvrstudy.srvr_common.dto.LoginDTO;
+import kr.kro.srvrstudy.srvr_main.config.FeignClientConfig;
+import kr.kro.srvrstudy.srvr_main.domain.model.auth.FindPasswordDTO;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "auth-client", url = "${auth-api.url}")
+@FeignClient(name = "auth-client", url = "${auth-api.url}/api/v1/auth", configuration = FeignClientConfig.class)
 public interface UserService {
 
-    @PostMapping("/api/v1/auth/join")
+    @PostMapping("/join")
     ApiResponse<Void> join(@RequestBody JoinDTO.Req req);
 
-    @PostMapping("/api/v1/auth/{username}/check")
+    @PostMapping("/{username}/check")
     ApiResponse<Void> checkUsernameDuplicate(@PathVariable String username);
 
-    @PostMapping("/api/v1/auth/login")
+    @PostMapping("/login")
     ApiResponse<Void> login(@RequestBody LoginDTO.Req req);
 
-    @GetMapping("/api/v1/auth/{email}/password-code")
+    @GetMapping("/{email}/password-code")
     ApiResponse<String> requestSendCodeMail(@PathVariable String email);
+
+    @PostMapping("/password-code-check")
+    ApiResponse<String> checkFindPasswordCode(@RequestBody FindPasswordDTO.Req req);
+
 }
 

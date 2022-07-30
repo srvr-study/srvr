@@ -9,11 +9,10 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.data.redis.core.ValueOperations;
 
 @Configuration
 @EnableRedisRepositories
-@EnableRedisHttpSession
 @RequiredArgsConstructor
 public class RedisConfig {
 
@@ -31,5 +30,10 @@ public class RedisConfig {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         return redisTemplate;
+    }
+
+    @Bean
+    public ValueOperations<String, Object> valueOperations() {
+        return redisTemplate().opsForValue();
     }
 }

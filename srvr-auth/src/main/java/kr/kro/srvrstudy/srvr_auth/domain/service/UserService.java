@@ -1,13 +1,19 @@
 package kr.kro.srvrstudy.srvr_auth.domain.service;
 
 import kr.kro.srvrstudy.srvr_auth.common.encryption.SHA256;
+import kr.kro.srvrstudy.srvr_auth.domain.service.model.auth.FindPasswordDTO;
+import kr.kro.srvrstudy.srvr_auth.persist.cache.RedisSession;
 import kr.kro.srvrstudy.srvr_auth.persist.entity.UserEntity;
 import kr.kro.srvrstudy.srvr_auth.persist.repository.UserRepository;
 import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
+import kr.kro.srvrstudy.srvr_common.exception.ApiFailureException;
+import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
 import kr.kro.srvrstudy.srvr_common.helper.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,10 +22,11 @@ public class UserService {
 
     private final MailService mailService;
     private final UserRepository userRepository;
+    private final SessionService sessionService;
 
     public void join(JoinDTO.Req req) {
         Validator.validateEmpty(req.getUsername(), userRepository::findById);
-        Validator.validateEmpty(req.getEmail(), userRepository::findUserEntityByEmail);
+        Validator.validateEmpty(req.getEmail(), userRepository::findByEmail);
 
         JoinDTO.Req encryptReq = req.encryptPassword(SHA256.encrypt(req.getPassword(), req.getUsername()));
         log.debug("request model: {}, password length: {}", encryptReq, encryptReq.getPassword().length());
@@ -28,15 +35,19 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void login(String username, String password) {
-        // todo 1. 세션 존재 여부 확인
-        // todo 2. 세션 존재시 세션 삭제
-        // todo 3. 세션 생성
-        // todo 4. 세션 엔티티 저장 및 redis에 session 저장
+    public String login(String username, String password) {
+        String encryptedPassword = SHA256.encrypt(password, username);
+
+        Optional<UserEntity> user = userRepository.findByUsernameAndPassword(username, encryptedPassword);
+        if (user.isEmpty()) {
+            throw new ApiFailureException(ErrorCode.FAILED_TO_MATCH_PASSWORD);
+        }
+        RedisSession session = sessionService.createSession(username);
+        return session.getSessionKey();
     }
 
     public void logout() {
-
+        // todo logout 기능 구현
     }
 
     public void checkUsernameDuplicate(String username) {
@@ -44,9 +55,14 @@ public class UserService {
     }
 
     public boolean sendCodeMail(String email, long ttl) {
-        Validator.validateNotEmpty(email, userRepository::findUserEntityByEmail);
+        Validator.validateNotEmpty(email, userRepository::findByEmail);
 
         return mailService.sendCodeMail(email, ttl);
     }
 
+    public boolean checkFindPasswordCode(FindPasswordDTO.Req req) {
+        Validator.validateNotEmpty(req.getEmail(), userRepository::findByEmail);
+
+        return mailService.checkCode(req);
+    }
 }
