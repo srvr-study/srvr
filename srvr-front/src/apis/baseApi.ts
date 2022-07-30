@@ -13,8 +13,6 @@ const getDefaultOption = (method: string, option?: RequestInit): RequestInit => 
     headers: {
       'Content-Type': 'application/json',
     },
-    mode: 'no-cors',
-    credentials: 'same-origin',
     ...option
   }
 }

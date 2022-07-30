@@ -29,10 +29,10 @@ export function SignUpBox(): JSX.Element {
   const navigate = useNavigate();
 
   const join = async () => {
-    const responseBody = await joinApi({ username, email, password });
+    const responseBody = await joinApi({ username, email, password, role: "MEMBER" });
 
-    if(responseBody.header.isSuccess) {
-      navigate("/auth/sign");
+    if(responseBody.header.isSuccessful) {
+      navigate("/auth/login");
     } else {
       
     }

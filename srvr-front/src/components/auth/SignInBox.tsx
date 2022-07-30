@@ -26,7 +26,11 @@ export function SignInBox(): JSX.Element {
   const navigate = useNavigate();
 
   const login = async () => {
-    await loginApi({ username, password });
+    const responseBody = await loginApi({ username, password });
+
+    if (responseBody.header.isSuccessful) {
+      navigate("/auth/success")
+    }
   };
 
   return (
