@@ -8,13 +8,13 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class AES256 {
+public class SymmetricKey {
 
     public static final String ALGORITHM = "AES/CBC/PKCS5Padding";
     private final String masterKey;
     private final String iv;
 
-    public AES256(String masterKey) {
+    public SymmetricKey(String masterKey) {
         Assert.hasText(masterKey, "masterKey can't be empty");
 
         this.masterKey = masterKey;

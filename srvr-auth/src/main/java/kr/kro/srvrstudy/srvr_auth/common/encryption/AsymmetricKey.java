@@ -5,7 +5,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class SHA256 {
+public class AsymmetricKey {
 
     private static final String ALGORITHM = "SHA3-256";
     private static MessageDigest md;
@@ -18,8 +18,8 @@ public class SHA256 {
         }
     }
 
-    private SHA256() {
-        throw new AssertionError("SHA256 can't be initiated");
+    private AsymmetricKey() {
+        throw new AssertionError("AsymmetricKey can't be initiated");
     }
 
     public static String encrypt(String password, String salt) {

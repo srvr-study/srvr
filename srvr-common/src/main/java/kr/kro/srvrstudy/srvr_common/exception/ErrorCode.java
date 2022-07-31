@@ -13,7 +13,8 @@ public enum ErrorCode {
     
     FAILED_TO_CONVERT_ENUM(-100200, "Failed to convert enum object"),
 
-    FAILED_TO_MATCH_PASSWORD(-200000, "Failed to match password");
+    FAILED_TO_MATCH_PASSWORD(-200000, "Failed to match password"),
+    INVALID_PASSWORD(-200001, "invalid password");
 
     private final long code;
     private final String message;

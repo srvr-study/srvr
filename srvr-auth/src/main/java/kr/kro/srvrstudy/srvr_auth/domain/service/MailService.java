@@ -8,7 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import kr.kro.srvrstudy.srvr_auth.domain.service.model.auth.FindPasswordDTO;
+import kr.kro.srvrstudy.srvr_auth.domain.model.auth.FindPasswordDTO;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;

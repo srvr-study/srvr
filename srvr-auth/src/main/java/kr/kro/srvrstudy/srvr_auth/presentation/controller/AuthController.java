@@ -1,7 +1,7 @@
 package kr.kro.srvrstudy.srvr_auth.presentation.controller;
 
 import kr.kro.srvrstudy.srvr_auth.domain.service.UserService;
-import kr.kro.srvrstudy.srvr_auth.domain.service.model.auth.FindPasswordDTO;
+import kr.kro.srvrstudy.srvr_auth.domain.model.auth.FindPasswordDTO;
 import kr.kro.srvrstudy.srvr_common.api.response.ApiResponse;
 import kr.kro.srvrstudy.srvr_common.api.response.FailureResponse;
 import kr.kro.srvrstudy.srvr_common.api.response.SuccessResponse;
@@ -11,10 +11,8 @@ import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -63,7 +61,7 @@ public class AuthController {
         return new SuccessResponse<>();
     }
 
-    @GetMapping("/{email}/password-code")
+    @PostMapping("/{email}/password-code")
     public ApiResponse<String> requestSendCodeMail(@PathVariable String email) {
         log.info("[auth] requestSendCodeMail {}", email);
 

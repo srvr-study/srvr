@@ -1,4 +1,4 @@
-package kr.kro.srvrstudy.srvr_auth.domain.service.model.auth;
+package kr.kro.srvrstudy.srvr_auth.domain.model.auth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
