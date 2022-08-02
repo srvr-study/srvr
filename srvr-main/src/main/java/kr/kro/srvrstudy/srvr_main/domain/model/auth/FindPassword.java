@@ -1,20 +1,17 @@
-package kr.kro.srvrstudy.srvr_auth.domain.model.auth;
+package kr.kro.srvrstudy.srvr_main.domain.model.auth;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-public class FindPasswordDTO {
+public class FindPassword {
 
-    private FindPasswordDTO() {
+    private FindPassword() {
         throw new AssertionError("FindPasswordDTO objects cannot be initiate");
     }
 
     @Getter
-    @NoArgsConstructor
     @ToString
     public static class Req {
-
         private String email;
         private String code;
     }

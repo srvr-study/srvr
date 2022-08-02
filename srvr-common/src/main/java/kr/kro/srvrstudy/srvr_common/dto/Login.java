@@ -2,7 +2,7 @@ package kr.kro.srvrstudy.srvr_common.dto;
 
 import lombok.Value;
 
-public class LoginDTO {
+public class Login {
 
     @Value
     public static class Req {

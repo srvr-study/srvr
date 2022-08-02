@@ -1,7 +1,7 @@
 package kr.kro.srvrstudy.srvr_auth.persist.entity;
 
 import kr.kro.srvrstudy.srvr_auth.persist.entity.converter.UserRoleConverter;
-import kr.kro.srvrstudy.srvr_common.dto.JoinDTO;
+import kr.kro.srvrstudy.srvr_common.dto.Join;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -41,7 +41,7 @@ public class UserEntity {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    public UserEntity(JoinDTO.Req req) {
+    public UserEntity(Join.Req req) {
         username = req.getUsername();
         password = req.getPassword();
         email = req.getEmail();

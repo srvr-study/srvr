@@ -6,6 +6,7 @@ import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+// todo front에 세션 넘겨주는 것
 public class FeignClientConfig {
 
     @Bean
@@ -28,5 +29,5 @@ public class FeignClientConfig {
             return errorDecoder.decode(methodKey, response);
         }
     }
-
+    
 }

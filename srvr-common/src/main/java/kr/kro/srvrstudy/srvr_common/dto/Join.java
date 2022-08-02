@@ -5,9 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-public class JoinDTO {
-    private JoinDTO() {
-        throw new AssertionError("JoinDTO objects cannot be initiate");
+public class Join {
+    private Join() {
+        throw new AssertionError("Join objects cannot be initiate");
     }
 
     @Getter

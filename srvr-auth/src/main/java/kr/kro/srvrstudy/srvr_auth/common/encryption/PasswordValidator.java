@@ -3,8 +3,8 @@ package kr.kro.srvrstudy.srvr_auth.common.encryption;
 import org.passay.CharacterCharacteristicsRule;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
+import org.passay.LengthRule;
 import org.passay.PasswordData;
-import org.passay.RuleResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class PasswordValidator {
     static {
         List<CharacterRule> rules = new ArrayList<>();
 
+//        rules.add(new LengthRule(8, 16));
         rules.add(new CharacterRule(EnglishCharacterData.Digit, 1));
         rules.add(new CharacterRule(EnglishCharacterData.Alphabetical, 1));
         rules.add(new CharacterRule(EnglishCharacterData.Special, 1));
