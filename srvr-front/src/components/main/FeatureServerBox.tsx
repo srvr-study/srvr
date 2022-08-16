@@ -5,13 +5,7 @@ import { Theme } from "@constants/theme";
 import { I18nContext } from "@providers/I18nProvider";
 
 
-export type FeatureServerType = {
-  name: string;
-  title: string;
-  isActive: boolean;
-  isNeedAuth: boolean;
-  path: string;
-};
+
 
 type Props = {
   title: string;
@@ -42,7 +36,6 @@ export default function FeatureServerBox({
     </FeatureServerBoxContainer>
   );
 }
-
 
 
 const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`

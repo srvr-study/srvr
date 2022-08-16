@@ -12,4 +12,3 @@ public class SrvrAuthApplication {
         SpringApplication.run(SrvrAuthApplication.class, args);
     }
 }
-

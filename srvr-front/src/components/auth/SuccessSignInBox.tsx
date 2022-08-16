@@ -1,17 +1,22 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { ThemeContext, ThemeProps } from "styled-components";
+import styled from "styled-components";
 
 import { AuthBoxWrapper } from "./AuthContainer";
 
 import { TextBoxButton, TextButton } from "@components/common/Button";
 import { ContentTitle } from "@components/common/PageTemplate";
-import { lightTheme, Theme } from "@constants/theme";
+import { useEffect } from "react";
+import { fetchMeApi } from "@apis/mainApi";
 
 
 export function SuccessSignInBox(): JSX.Element {
-  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchMeApi().then((data) => {
+      console.log(data);
+    });
+  }, []);
 
   return (
     <SuccessSignInBoxWrapper width={"460px"}>

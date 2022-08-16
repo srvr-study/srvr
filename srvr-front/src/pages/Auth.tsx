@@ -9,8 +9,6 @@ import { I18nContext } from "@providers/I18nProvider";
 export default function Auth(): JSX.Element {
   const authText = useContext(I18nContext).i18n.auth;
   
-  console.log(document.cookie);
-
   return (
     <DefaultPageTemplate headerText={authText.headerText} documentUrl="/auth/document">
       <AuthWrapper>

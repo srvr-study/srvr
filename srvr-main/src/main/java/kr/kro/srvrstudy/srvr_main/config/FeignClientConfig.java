@@ -1,17 +1,27 @@
 package kr.kro.srvrstudy.srvr_main.config;
 
 
+import feign.Feign;
+import feign.Logger;
 import feign.Response;
 import feign.codec.ErrorDecoder;
+import feign.slf4j.Slf4jLogger;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 
-// todo front에 세션 넘겨주는 것
 public class FeignClientConfig {
 
     @Bean
     public ErrorDecoder errorDecoder() {
         return new Decoder();
+    }
+    @Bean
+    @Scope("prototype")
+    public Feign.Builder feignBuilder() {
+        return Feign.builder()
+                .logger(new Slf4jLogger())
+                .logLevel(Logger.Level.HEADERS);
     }
 
     private static class Decoder implements ErrorDecoder {
@@ -29,5 +39,5 @@ public class FeignClientConfig {
             return errorDecoder.decode(methodKey, response);
         }
     }
-    
+
 }

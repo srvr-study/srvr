@@ -4,6 +4,7 @@ import styled, { ThemeContext, ThemeProps } from "styled-components";
 
 import { AuthBoxWrapper } from "./AuthContainer";
 
+import { checkVerifiactionCode, requestVerificationCodeMail } from "@apis/authApi";
 import { TextBoxButton, TextButton } from "@components/common/Button";
 import { IconRoundInput } from "@components/common/Input";
 import { ContentTitle } from "@components/common/PageTemplate";
@@ -23,6 +24,21 @@ export function FindPasswordBox(): JSX.Element {
   const [getCode, setGetCode] = useState<Boolean>(false);
   const navigate = useNavigate();
 
+  function sendEmail() {
+    requestVerificationCodeMail(email).then(body => body.header.isSuccessful && setGetCode(true));
+  }
+
+  function checkCode() {
+    checkVerifiactionCode({email, code}).then(body => {
+      if (body.header.isSuccessful) {
+        navigate("/auth/reset-password")
+      } else {
+        // todo 실패 모달을 띄우기
+        setCode("");
+      }
+    });
+  }
+
   return (
     <FindPasswordBoxWrapper width={"460px"}>
       <ContentTitle>Find Password</ContentTitle>
@@ -41,8 +57,8 @@ export function FindPasswordBox(): JSX.Element {
         onChange={({ target }) => setCode(target.value)}
       />}
       <ErrorMeeage>{errorMessage}</ErrorMeeage>
-      <TextBoxButton text={getCode ? "코드 다시 받기" : "코드받기"} width={"460px"} onClick={() => { }} />
-      {getCode && <TextBoxButton text={"확인"} width={"460px"} onClick={() => { }} />}
+      <TextBoxButton text={getCode ? "코드 다시 받기" : "코드받기"} width={"460px"} onClick={sendEmail} />
+      {getCode && <TextBoxButton text={"확인"} width={"460px"} onClick={checkCode} />}
       <TextButton text={"돌아가기"} onClick={() => navigate("/auth/login")} />
     </FindPasswordBoxWrapper>
   );

@@ -1,6 +1,5 @@
 package kr.kro.srvrstudy.srvr_auth.domain.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.kro.srvrstudy.srvr_auth.common.encryption.AsymmetricKey;
 import kr.kro.srvrstudy.srvr_auth.common.encryption.PasswordValidator;
 import kr.kro.srvrstudy.srvr_auth.domain.model.User;

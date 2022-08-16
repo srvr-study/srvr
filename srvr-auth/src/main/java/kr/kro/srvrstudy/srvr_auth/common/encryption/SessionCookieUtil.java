@@ -1,6 +1,7 @@
-package kr.kro.srvrstudy.srvr_auth.common;
+package kr.kro.srvrstudy.srvr_auth.common.encryption;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
@@ -8,13 +9,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-
 @Component
 public class SessionCookieUtil {
 
     private final String sessionCookieName;
 
-    public SessionCookieUtil(@Value("srvr.auth.session.cookie.name") String sessionCookieName) {
+    public SessionCookieUtil(@Value("${srvr.auth.session.cookie.name}") String sessionCookieName) {
         this.sessionCookieName = sessionCookieName;
     }
 

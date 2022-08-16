@@ -6,8 +6,13 @@ import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.InternetAddressEditor;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 @Service
@@ -20,10 +25,13 @@ public class MailService {
     public void sendCodeMail(String email, String verificationCode) {
 
         try {
-            final SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(email);
-            message.setSubject("인증메일입니다.");
-            message.setText("<p>" + "인증 코드 " + verificationCode + "</p>");
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, "UTF-8");
+
+            InternetAddress recipient = new InternetAddress(email);
+            helper.setFrom(recipient);
+            helper.setSubject("[SRVR] 비밀번호 찾기 메일입니다");
+            helper.setText("<p>" + "인증 코드 " + verificationCode + "</p>", true);
 
             javaMailSender.send(message);
         } catch (Exception e) {

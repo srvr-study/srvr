@@ -1,7 +1,9 @@
 package kr.kro.srvrstudy.srvr_auth.config.interceptor;
 
-import kr.kro.srvrstudy.srvr_auth.common.SessionCookieUtil;
 import kr.kro.srvrstudy.srvr_auth.domain.service.SessionService;
+import kr.kro.srvrstudy.srvr_common.exception.ApiFailureException;
+import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
+import kr.kro.srvrstudy.srvr_auth.common.encryption.SessionCookieUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -25,7 +27,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         String sessionKey = sessionCookieUtil.getSessionKey(request);
 
         if (Objects.isNull(sessionKey)) {
-            return false;
+            throw new ApiFailureException(ErrorCode.INVALID_REQUEST);
         }
 
         sessionService.extendSession(sessionKey);

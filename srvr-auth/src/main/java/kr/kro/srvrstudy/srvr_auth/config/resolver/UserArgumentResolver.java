@@ -1,9 +1,9 @@
 package kr.kro.srvrstudy.srvr_auth.config.resolver;
 
-import kr.kro.srvrstudy.srvr_auth.common.SessionCookieUtil;
 import kr.kro.srvrstudy.srvr_auth.domain.model.SessionUser;
 import kr.kro.srvrstudy.srvr_auth.domain.model.User;
 import kr.kro.srvrstudy.srvr_auth.domain.service.UserService;
+import kr.kro.srvrstudy.srvr_auth.common.encryption.SessionCookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

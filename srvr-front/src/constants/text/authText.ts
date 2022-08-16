@@ -1,9 +1,13 @@
 import { HeaderText } from ".";
 
+// TODO  비밀번호 찾기 화면, 로그인 성공 화면 Text 채우기
+
 export type AuthText = {
   headerText: HeaderText,
   signinInText: SignInInText,
   signUpText: SignUpText,
+  findPasswordText: FindPasswordText,
+  successSignInText: SuccessSignInText,
 }
 
 type SignInInText = {
@@ -24,6 +28,14 @@ type SignUpText = {
   joinText: string;
   backText: string;
   siteCautionMessage: string;
+}
+
+type FindPasswordText = {
+
+}
+
+type SuccessSignInText = {
+
 }
 
 export const AuthKR = function (): AuthText {
@@ -53,10 +65,20 @@ export const AuthKR = function (): AuthText {
     siteCautionMessage: "공부용 웹 사이트로 사용자의 개인정보를 보호 하지 않는 사이트입니다. 회원가입 주의바랍니다.",
   }
 
+  const findPasswordText: FindPasswordText = {
+
+  }
+
+  const successSignInText: SuccessSignInText = {
+
+  }
+
   return {
-    headerText: headerText,
-    signinInText: signinInText,
-    signUpText: signUpText,
+    headerText,
+    signinInText,
+    signUpText,
+    findPasswordText,
+    successSignInText
   }
 }();
 
@@ -87,9 +109,19 @@ export const AuthEN = function (): AuthText {
     siteCautionMessage: "It is a study website that does not protect your personal information. Please be careful of sign up.",
   }
 
+  const findPasswordText: FindPasswordText = {
+
+  }
+
+  const successSignInText: SuccessSignInText = {
+
+  }
+
   return {
-    headerText: headerText,
-    signinInText: signinInText,
-    signUpText: signUpText,
+    headerText,
+    signinInText,
+    signUpText,
+    findPasswordText,
+    successSignInText
   }
 }();

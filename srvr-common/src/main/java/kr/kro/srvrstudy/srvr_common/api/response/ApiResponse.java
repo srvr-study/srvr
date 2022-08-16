@@ -37,6 +37,8 @@ public abstract class ApiResponse<T> {
     }
 
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class BodyContent<T> {
 
         @JsonInclude(JsonInclude.Include.NON_DEFAULT)

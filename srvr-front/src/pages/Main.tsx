@@ -5,16 +5,19 @@ import styled, { ThemeProps } from "styled-components";
 import useStompClient from "@/hooks/useStompClient";
 import { fetchFeatureServers } from "@apis/mainApiFake";
 // import { fetchFeatureServers } from "@apis/mainApi";
-import FeatureServerBox, { FeatureServerType} from "@components/main/FeatureServerBox";
+import { fetchMeApi } from "@apis/mainApiFake";
+// import { fetchMeApi } from "@apis/mainApi";
+import FeatureServerBox from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
 import { Theme } from "@constants/theme";
+import { FeatureServerType } from "@models/main/FeatureServer";
+import { SignInUserType } from "@models/auth/User";
 import { I18nContext } from "@providers/I18nProvider";
 
 
 export default function Main(): JSX.Element {
-  const [featureServersMap, setFeatureServersMap] = useState<
-    Map<String, FeatureServerType>
-  >(new Map());
+  const [featureServersMap, setFeatureServersMap] = useState<Map<String, FeatureServerType>>(new Map());
+  const [me, setMe] = useState<SignInUserType | null>(null);
   const mainText = useContext(I18nContext).i18n.main;
   const { subscribe } = useStompClient();
 
@@ -28,16 +31,24 @@ export default function Main(): JSX.Element {
     });
   }
 
+  function isAdmin() {
+    return me && me.role === "admin"; 
+  }
+
   useEffect(() => {
-    fetchFeatureServers().then((body: any) => {
-      const data = body.result.contents;
-      renderFeatureServer(data);
+    fetchMeApi().then(apiResponse => {
+      const signinUser = apiResponse.result.content;
+      signinUser && setMe(signinUser);
+    })
+
+    fetchFeatureServers().then((apiResponse) => {
+      const featureServers = apiResponse.result.contents;
+      renderFeatureServer(featureServers);
     });
 
-    subscribe("/subscribe/feature-servers", (featureServers) => {
-      const data = JSON.parse(featureServers.body);
-      console.log(data)
-      renderFeatureServer(data)
+    subscribe("/subscribe/feature-servers", (webSocketMessage) => {
+      const featureServers = JSON.parse(webSocketMessage.body);
+      renderFeatureServer(featureServers);
     });
   }, []);
 
@@ -53,6 +64,7 @@ export default function Main(): JSX.Element {
             path={featureServer.path}
           />
         ))}
+        {isAdmin() && <AddFeatureServerButton />}
       </FeatureServerWrapper>
     </DefaultPageTemplate>
   );
