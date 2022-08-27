@@ -45,11 +45,11 @@ public class FeatureServerService {
     @Transactional
     public void createFeatureServer(FeatureServerRequest featureServerRequest) {
         Validator.validateEmpty(featureServerRequest.getName(), this.featureServerRepository::findByName);
-        Validator.validateEmpty(featureServerRequest.getHost(), this.featureServerRepository::findByHost);
+        Validator.validateEmpty(featureServerRequest.getUrl(), this.featureServerRepository::findByUrl);
 
         FeatureServerEntity newFeatureServerEntity = FeatureServerEntity.builder()
                 .featureServerId(IdGenerator.generate())
-                .host(featureServerRequest.getHost())
+                .url(featureServerRequest.getUrl())
                 .name(featureServerRequest.getName())
                 .description(featureServerRequest.getDescription())
                 .creatorMemberId(featureServerRequest.getUpdatorMemberId())
@@ -64,10 +64,10 @@ public class FeatureServerService {
     @Transactional
     public void updateFeatureServer(String featureServerName, FeatureServerRequest featureServer) {
         FeatureServerEntity featureServerEntity = featureServerRepository.findByName(featureServerName)
-                .orElseThrow(() -> new ApiFailureException(ErrorCode.INVALID_REQUEST));
+                                                                         .orElseThrow(() -> new ApiFailureException(ErrorCode.INVALID_REQUEST));
 
-        if (Strings.isBlank(featureServer.getHost())) {
-            featureServerEntity.setHost(featureServer.getHost());
+        if (Strings.isBlank(featureServer.getUrl())) {
+            featureServerEntity.setUrl(featureServer.getUrl());
         }
 
         if (Strings.isBlank(featureServer.getName())) {
@@ -85,7 +85,7 @@ public class FeatureServerService {
     @Transactional
     public void deleteFeatureServer(FeatureServer featureServer) {
         FeatureServerEntity featureServerEntity = featureServerRepository.findByName(featureServer.getName())
-                .orElseThrow(() -> new ApiFailureException(ErrorCode.INVALID_REQUEST));
+                                                                         .orElseThrow(() -> new ApiFailureException(ErrorCode.INVALID_REQUEST));
         featureServerRepository.delete(featureServerEntity);
         featureServerStompRepository.deleteFeatureServer(featureServer.getName());
     }

@@ -17,6 +17,6 @@ public interface FeatureServerRepository extends JpaRepository<FeatureServerEnti
 
     Optional<FeatureServerEntity> findByName(String name);
 
-    Optional<FeatureServerEntity> findByHost(String host);
+    Optional<FeatureServerEntity> findByUrl(String url);
 
 }

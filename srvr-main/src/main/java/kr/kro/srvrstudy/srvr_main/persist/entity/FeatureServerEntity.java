@@ -24,8 +24,8 @@ public class FeatureServerEntity {
     @Column(name = "feature_server_id", nullable = false)
     private Long featureServerId;
 
-    @Column(name = "host", nullable = false, unique = true, length = 500)
-    private String host;
+    @Column(name = "url", nullable = false, unique = true, length = 500)
+    private String url;
 
     @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;

@@ -12,8 +12,11 @@ import javax.validation.constraints.NotNull;
 public class MainServerClientProperties {
 
     @NotNull
-    private String echo;
-
+    private String url;
     @NotNull
-    private String echoPath;
+    private String echo = "/api/v1/echo";
+    @NotNull
+    private String echoPath = "/api/v1/echo/{path}";
+    @NotNull
+    private String getFeatureServers = "/api/v1/feature-servers";
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/echo")
 public class EchoController {
 
-    @PostMapping("/")
+    @PostMapping
     public ApiResponse<String> post(@RequestBody String body) {
         return new SuccessResponse<>(body);
     }

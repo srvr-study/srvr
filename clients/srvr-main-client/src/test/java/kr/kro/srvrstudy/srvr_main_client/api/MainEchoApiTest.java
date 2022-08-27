@@ -1,5 +1,6 @@
 package kr.kro.srvrstudy.srvr_main_client.api;
 
+import kr.kro.srvrstudy.srvr_common.api.response.ApiResponse;
 import kr.kro.srvrstudy.srvr_common.config.WebClientConfig;
 import kr.kro.srvrstudy.srvr_main_client.config.MainServerClientProperties;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
@@ -35,8 +35,8 @@ class MainEchoApiTest {
 
     @BeforeEach
     void setup() {
-        when(properties.getEcho()).thenReturn("http://localhost:8080");
-        when(properties.getEchoPath()).thenReturn("http://localhost:8080/%s");
+        when(properties.getEcho()).thenReturn("http://localhost:8080/api/v1/echo");
+        when(properties.getEchoPath()).thenReturn("http://localhost:8080/api/v1/echo/{path}");
 
         this.mainEchoApi = new MainEchoApi(webClient, properties);
     }
@@ -49,8 +49,8 @@ class MainEchoApiTest {
 
         // when
         IntStream.range(0, end).parallel().forEach(index -> {
-            Map<String, Object> result = mainEchoApi.getEchoPath(String.valueOf(index));
-            map.put(index, (String) ((Map) result.get("result")).get("content"));
+            ApiResponse<Object> response = mainEchoApi.getEchoPath(String.valueOf(index));
+            map.put(index, (String) response.getResult().getContent());
         });
 
         // then
@@ -66,8 +66,8 @@ class MainEchoApiTest {
 
         // when
         IntStream.range(0, end).parallel().forEach(index -> {
-            Map<String, Object> result = this.mainEchoApi.postEcho(String.valueOf(index));
-            map.put(index, (String) ((Map) result.get("result")).get("content"));
+            ApiResponse<Object> response = this.mainEchoApi.postEcho(String.valueOf(index));
+            map.put(index, (String) response.getResult().getContent());
 
         });
 

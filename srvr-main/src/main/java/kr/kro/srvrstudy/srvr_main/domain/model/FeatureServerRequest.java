@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class FeatureServerRequest {
 
-    private final String host;
+    private final String url;
     private final String name;
     private final String description;
 

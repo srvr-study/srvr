@@ -52,7 +52,7 @@ public class FeatureServerTagService {
         FeatureServerTagPk pk = new FeatureServerTagPk(featureServerTagRequest.getFeatureServerId(), featureServerTagRequest.getTagId());
         Validator.validateNotEmpty(pk, featureServerTagRepository::findById);
 
-        FeatureServerTagEntity oldFeatureServerTag = featureServerTagRepository.getById(pk);
+        FeatureServerTagEntity oldFeatureServerTag = featureServerTagRepository.getReferenceById(pk);
         oldFeatureServerTag.setPrimary(featureServerTagRequest.isPrimary());
 
     }
@@ -61,7 +61,7 @@ public class FeatureServerTagService {
         FeatureServerTagPk pk = new FeatureServerTagPk(featureServerId, tagId);
         Validator.validateNotEmpty(pk, featureServerTagRepository::findById);
 
-        featureServerTagRepository.delete(featureServerTagRepository.getById(pk));
+        featureServerTagRepository.delete(featureServerTagRepository.getReferenceById(pk));
     }
 
 }

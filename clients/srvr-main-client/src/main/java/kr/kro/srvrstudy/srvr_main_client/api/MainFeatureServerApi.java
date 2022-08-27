@@ -11,23 +11,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 @RequiredArgsConstructor
-public class MainEchoApi {
-
+public class MainFeatureServerApi {
     private final WebClient webClient;
     private final MainServerClientProperties properties;
 
-    public ApiResponse<Object> postEcho(String body) {
-        return this.webClient.method(HttpMethod.POST)
-                             .uri(UriHelper.makeUri(properties.getUrl(), properties.getEcho()))
-                             .bodyValue(body)
-                             .retrieve()
-                             .bodyToMono(new ParameterizedTypeReference<ApiResponse<Object>>() {})
-                             .block();
-    }
-
-    public ApiResponse<Object> getEchoPath(String path) {
+    public ApiResponse<Object> getFeatureServers() {
         return this.webClient.method(HttpMethod.GET)
-                             .uri(UriHelper.makeUri(properties.getUrl(), properties.getEchoPath()), path)
+                             .uri(UriHelper.makeUri(properties.getUrl(), properties.getGetFeatureServers()))
                              .retrieve()
                              .bodyToMono(new ParameterizedTypeReference<ApiResponse<Object>>() {})
                              .block();

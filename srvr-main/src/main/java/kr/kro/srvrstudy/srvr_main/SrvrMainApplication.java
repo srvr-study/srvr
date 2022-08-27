@@ -8,7 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 public class SrvrMainApplication {
 
-    // TODO 0823 메인에서 auth 분리
     public static void main(String[] args) {
         SpringApplication.run(SrvrMainApplication.class, args);
     }
