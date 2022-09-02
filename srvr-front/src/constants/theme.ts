@@ -7,7 +7,8 @@ type FontProps = {
 
 type CommonColor = {
   red: string;
-  grey: string;
+  gray: string;
+  darkGray: string;
 }
 
 interface Color extends CommonColor {
@@ -21,7 +22,7 @@ interface Color extends CommonColor {
   textSecondary: string;
   placeholder: string;
   border: string;
-};
+}
 
 type Size = {
   xlg: string;
@@ -89,7 +90,8 @@ const fontSizes = {
 
 const commonColor = {
   red: "#DB2323",
-  grey: "#F4F4F4"
+  gray: "#F4F4F4",
+  darkGray: "#C4C4C4"
 }
 
 const lightColors: Color = {
@@ -120,7 +122,7 @@ const darkColors: Color = {
   border: "#22272E",
 };
 
-const display = {
+export const display = {
   flexCenter: `
     display: flex;
     justify-content: center;

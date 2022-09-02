@@ -6,14 +6,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.validation.constraints.NotNull;
 
-@ConfigurationProperties (prefix = "srvr.server.main")
+@ConfigurationProperties(prefix = "srvr.server.main")
 @Getter
 @Setter
 public class MainServerClientProperties {
 
     @NotNull
-    private String echo;
-
+    private String url;
     @NotNull
-    private String echoPath;
+    private String echo = "/api/v1/echo";
+    @NotNull
+    private String echoPath = "/api/v1/echo/{path}";
+    @NotNull
+    private String getFeatureServers = "/api/v1/feature-servers";
 }

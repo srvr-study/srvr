@@ -5,24 +5,33 @@ import documentLight from "@assets/icons/document-light.svg";
 import homeDark from "@assets/icons/home-dark.svg";
 import homeLight from "@assets/icons/home-light.svg";
 import { IconButton } from "@components/common/Button";
-import { commonTextKR } from "@constants/text";
 import { lightTheme, Theme } from "@constants/theme";
+import { HeaderText } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
+import { useNavigate } from "react-router-dom";
 
-export function DefaultHeader(): JSX.Element {
+type HeaderProps = {
+  headerText: HeaderText;
+  documentUrl: string;
+}
+
+export function DefaultHeader({headerText, documentUrl}: HeaderProps): JSX.Element {
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   return (
     <HeaderContainer>
-      <PageTitle>{commonTextKR.MainPageTitle}</PageTitle>
+      <PageTitle>{headerText.pageTitle}</PageTitle>
       <FlexRightWrapper>
         <IconButton
           src={theme === lightTheme ? documentDark : documentLight}
-          title={commonTextKR.HeaderNavItemDocument}
+          title={headerText.headerNavItemDocument}
+          onClick={() => navigate(documentUrl)}
         />
         <IconButton
           src={theme === lightTheme ? homeDark : homeLight}
-          title={commonTextKR.HeaderNavItemHome}
+          title={headerText.headerNavItemHome}
+          onClick={() => navigate("/")}
         />
       </FlexRightWrapper>
     </HeaderContainer>

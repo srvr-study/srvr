@@ -24,9 +24,9 @@ public class FeatureServerStompRepository {
     @PostConstruct
     public void init() {
         this.updateAll(featureServerRepository.findAll()
-                                              .stream()
-                                              .map(FeatureServer::of)
-                                              .collect(Collectors.toList()));
+                .stream()
+                .map(FeatureServer::of)
+                .collect(Collectors.toList()));
     }
 
     public List<FeatureServer> findAll() {

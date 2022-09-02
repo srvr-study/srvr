@@ -1,36 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css, ThemeProps } from "styled-components";
-import { mainTextKR } from "@constants/text";
-import { Theme } from "@constants/theme";
 
-export type FeatureServerType = {
-  name: string;
-  title: string;
-  isActive: boolean;
-  isNeedAuth: boolean;
-};
+import { Theme } from "@constants/theme";
+import { I18nContext } from "@providers/I18nProvider";
+
+
+
 
 type Props = {
   title: string;
   isActive: boolean;
   isNeedAuth: boolean;
+  path: string;
 };
 
 export default function FeatureServerBox({
   title,
   isActive,
   isNeedAuth = false,
+  path,
 }: Props): JSX.Element {
+  const mainText = useContext(I18nContext).i18n.main;
+
   return (
-    <FeatureServerBoxContainer isActive={isActive} disabled={!isActive}>
+    <FeatureServerBoxContainer
+      isActive={isActive}
+      disabled={!isActive}
+      onClick={() => (window.location.href = path)}
+    >
       <Title>{title}</Title>
       {!isActive && (
-        <NonActive>{mainTextKR.FeatureServerBoxIsNotActive}</NonActive>
+        <NonActive>{mainText.featureServerText.featureServerBoxIsNotActive}</NonActive>
       )}
-      {isNeedAuth && <NeedAuth>{mainTextKR.FeatureServerBoxNeedAuth}</NeedAuth>}
+      {isNeedAuth && <NeedAuth>{mainText.featureServerText.featureServerBoxNeedAuth}</NeedAuth>}
     </FeatureServerBoxContainer>
   );
 }
+
 
 const FeatureServerBoxContainer = styled.button<{ isActive: Boolean }>`
   position: relative;

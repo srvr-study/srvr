@@ -4,20 +4,27 @@ import moon from "@assets/icons/moon-dark.svg";
 import sun from "@assets/icons/sun-light.svg";
 import { IconButton } from "@components/common/Button";
 import { DefaultHeader } from "@components/common/Header";
-import { errorKR } from "@constants/text";
 import { lightTheme, Theme } from "@constants/theme";
+import { HeaderText } from "@constants/text";
 import { ThemeContext } from "@providers/ThemeProvider";
+import { errorKR } from "@constants/text/commonText";
 
 type Props = {
   children: React.ReactNode;
+  headerText: HeaderText;
+  documentUrl: string;
 };
 
-export function DefaultPageTemplate({ children }: Props): JSX.Element {
+export function DefaultPageTemplate({
+  children,
+  headerText,
+  documentUrl
+}: Props): JSX.Element {
   const { theme, themeDispatch } = useContext(ThemeContext);
 
   const changeTheme = () => {
     if (!themeDispatch) {
-      throw new Error(errorKR.FailedToSetTheme);
+      throw new Error(errorKR.failedToSetTheme);
     }
     if (theme === lightTheme) {
       themeDispatch({ type: "SET_DARK_THEME" });
@@ -27,20 +34,22 @@ export function DefaultPageTemplate({ children }: Props): JSX.Element {
   };
 
   return (
-    <TemplateContainder>
-      <DefaultHeader />
-      {children}
+    <TemplateContainer>
+      <DefaultHeader headerText={headerText} documentUrl={documentUrl} />
+      <ContentContainer>
+        {children}
+      </ContentContainer>
       <FloatingContainer>
         <IconButton
           src={theme === lightTheme ? moon : sun}
           onClick={changeTheme}
         />
       </FloatingContainer>
-    </TemplateContainder>
+    </TemplateContainer>
   );
 }
 
-const TemplateContainder = styled.div`
+const TemplateContainer = styled.div`
   ${({ theme }: ThemeProps<Theme>) => theme.display.flexCenterColumn}
 
   width: 100%;
@@ -50,6 +59,13 @@ const TemplateContainder = styled.div`
 
   transition: 0.5s;
 `;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+
+  width: 100%;
+`
 
 const FloatingContainer = styled.div`
   position: fixed;
@@ -68,4 +84,11 @@ const FloatingContainer = styled.div`
 
     transition: 0.5s;
   }
+`;
+
+export const ContentTitle = styled.h1`
+margin-bottom: 45px;
+
+${({ theme }: ThemeProps<Theme>) => theme.font.build({ size: theme.font.size.title.xlg })}
+color: ${({ theme }: ThemeProps<Theme>) => theme.color.textPrimary};
 `;

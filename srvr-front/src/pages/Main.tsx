@@ -1,20 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { ThemeProps } from "styled-components";
+
+import useStompClient from "@/hooks/useStompClient";
 import { fetchFeatureServers } from "@apis/mainApiFake";
 // import { fetchFeatureServers } from "@apis/mainApi";
-import FeatureServerBox, {
-  FeatureServerType,
-} from "@components/main/FeatureServerBox";
+import { fetchMeApi } from "@apis/mainApiFake";
+// import { fetchMeApi } from "@apis/mainApi";
+import FeatureServerBox from "@components/main/FeatureServerBox";
 import { DefaultPageTemplate } from "@components/common/PageTemplate";
-import useStompClient from "@/hooks/useStompClient";
 import { Theme } from "@constants/theme";
+import { FeatureServerType } from "@models/main/FeatureServer";
+import { SignInUserType } from "@models/auth/User";
+import { I18nContext } from "@providers/I18nProvider";
+
 
 export default function Main(): JSX.Element {
-  const [featureServersMap, setFeatureServersMap] = useState<
-    Map<String, FeatureServerType>
-  >(new Map());
-
+  const [featureServersMap, setFeatureServersMap] = useState<Map<String, FeatureServerType>>(new Map());
+  const [me, setMe] = useState<SignInUserType | null>(null);
+  const mainText = useContext(I18nContext).i18n.main;
   const { subscribe } = useStompClient();
 
   function renderFeatureServer(data: any) {
@@ -27,21 +31,29 @@ export default function Main(): JSX.Element {
     });
   }
 
+  function isAdmin() {
+    return me && me.role === "admin"; 
+  }
+
   useEffect(() => {
-    fetchFeatureServers().then((body: any) => {
-      const data = body.result.contents
-      renderFeatureServer(data);
+    fetchMeApi().then(apiResponse => {
+      const signinUser = apiResponse.result.content;
+      signinUser && setMe(signinUser);
+    })
+
+    fetchFeatureServers().then((apiResponse) => {
+      const featureServers = apiResponse.result.contents;
+      renderFeatureServer(featureServers);
     });
 
-    subscribe("/subscribe/feature-servers", (featureServers) => {
-      const data = JSON.parse(featureServers.body);
-      console.log(data)
-      renderFeatureServer(data)
-    })
+    subscribe("/subscribe/feature-servers", (webSocketMessage) => {
+      const featureServers = JSON.parse(webSocketMessage.body);
+      renderFeatureServer(featureServers);
+    });
   }, []);
 
   return (
-    <DefaultPageTemplate>
+    <DefaultPageTemplate headerText={mainText.headerText} documentUrl="/document">
       <FeatureServerWrapper>
         {Array.from(featureServersMap.values()).map((featureServer) => (
           <FeatureServerBox
@@ -49,8 +61,10 @@ export default function Main(): JSX.Element {
             title={featureServer.name}
             isActive={featureServer.isActive}
             isNeedAuth={featureServer.isNeedAuth}
+            path={featureServer.path}
           />
         ))}
+        {isAdmin() && <AddFeatureServerButton />}
       </FeatureServerWrapper>
     </DefaultPageTemplate>
   );
@@ -58,8 +72,8 @@ export default function Main(): JSX.Element {
 
 const FeatureServerWrapper = styled.div`
   display: flex;
-  flex-grow: 1;
   flex-wrap: wrap;
+  align-content: baseline;
   
   width: 100%;
   padding: 55px 20px 0 45px;

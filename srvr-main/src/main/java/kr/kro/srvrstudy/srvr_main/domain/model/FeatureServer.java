@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerStatus.DISABLED;
+import static kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerStatus.*;
 
 @Builder
 @Getter
 public class FeatureServer {
 
-    private final String host;
+    private final String url;
     private final String name;
     private final String description;
     private final List<Tag> tags;
@@ -24,21 +24,31 @@ public class FeatureServer {
 
     public static FeatureServer of(FeatureServerEntity entity) {
         return FeatureServer.builder()
-                            .host(entity.getHost())
-                            .name(entity.getName())
-                            .description(entity.getDescription())
-                            .tags(Optional.ofNullable(entity.getFeatureServerTags())
-                                          .orElse(Collections.emptyList())
-                                          .stream()
-                                          .map(FeatureServerTagEntity::getTag)
-                                          .map(Tag::of)
-                                          .collect(Collectors.toList()))
-                            .status(DISABLED)
-                            .build();
+                .url(entity.getUrl())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .tags(Optional.ofNullable(entity.getFeatureServerTags())
+                        .orElse(Collections.emptyList())
+                        .stream()
+                        .map(FeatureServerTagEntity::getTag)
+                        .map(Tag::of)
+                        .collect(Collectors.toList()))
+                .status(DISABLED)
+                .build();
     }
 
-    public void setStatus(FeatureServerStatus status) {
-        this.status = status;
+    public void enable() {
+        if (!ENABLED.equals(this.status))
+            this.status = ENABLED;
     }
 
+    public void disable() {
+        if (!DISABLED.equals(this.status))
+            this.status = DISABLED;
+    }
+
+    public void develop() {
+        if (!DEVELOPING.equals(this.status))
+            this.status = DEVELOPING;
+    }
 }

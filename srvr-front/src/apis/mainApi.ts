@@ -1,8 +1,6 @@
-const baseUrl = process.env.REACT_APP_SRVR_MAIN_SERVER_HOST;
+import { SignInUserType } from "@models/auth/User";
+import { FeatureServerType } from "@models/main/FeatureServer";
+import { makeMainUrl, _get } from "./baseApi";
 
-const url = (path: string): string => baseUrl + path;
-const getJson = (response: Response): Promise<any> => response.json();
-
-export const fetchFeatureServers = () => {
-    return fetch(url("api/v1/feature-servers")).then(getJson)
-};
+export const fetchMeApi = () => _get<SignInUserType>(makeMainUrl("/api/v1/user/me"));
+export const fetchFeatureServersApi = () => _get<FeatureServerType>(makeMainUrl("api/v1/feature-servers"));

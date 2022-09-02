@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
-import { errorKR } from "@constants/text";
 import { darkTheme, lightTheme, Theme } from "@constants/theme";
+import { errorKR } from "@constants/text/commonText";
 
 type Props = {
   children: React.ReactNode;
@@ -30,7 +30,7 @@ const reducer = (_: Theme, action: ThemeAction) => {
     case "SET_DARK_THEME":
       return darkTheme;
     default:
-      throw new Error(errorKR.FailedToSetTheme);
+      throw new Error(errorKR.failedToSetTheme);
   }
 };
 

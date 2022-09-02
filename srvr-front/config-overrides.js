@@ -8,6 +8,7 @@ module.exports = override(
     "@assets": path.resolve(__dirname, "src/assets"),
     "@components": path.resolve(__dirname, "src/components"),
     "@constants": path.resolve(__dirname, "src/constants"),
+    "@model": path.resolve(__dirname, "src/models"),
     "@pages": path.resolve(__dirname, "src/pages"),
     "@providers": path.resolve(__dirname, "src/providers"),
   })

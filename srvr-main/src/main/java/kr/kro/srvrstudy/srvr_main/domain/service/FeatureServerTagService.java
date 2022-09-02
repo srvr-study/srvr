@@ -2,7 +2,7 @@ package kr.kro.srvrstudy.srvr_main.domain.service;
 
 import kr.kro.srvrstudy.srvr_main.domain.model.FeatureServerTagRequest;
 import kr.kro.srvrstudy.srvr_main.domain.model.Tag;
-import kr.kro.srvrstudy.srvr_main.helper.Validator;
+import kr.kro.srvrstudy.srvr_common.helper.Validator;
 import kr.kro.srvrstudy.srvr_main.persist.entity.FeatureServerTagEntity;
 import kr.kro.srvrstudy.srvr_main.persist.entity.FeatureServerTagPk;
 import kr.kro.srvrstudy.srvr_main.persist.repository.FeatureServerRepository;
@@ -52,7 +52,7 @@ public class FeatureServerTagService {
         FeatureServerTagPk pk = new FeatureServerTagPk(featureServerTagRequest.getFeatureServerId(), featureServerTagRequest.getTagId());
         Validator.validateNotEmpty(pk, featureServerTagRepository::findById);
 
-        FeatureServerTagEntity oldFeatureServerTag = featureServerTagRepository.getById(pk);
+        FeatureServerTagEntity oldFeatureServerTag = featureServerTagRepository.getReferenceById(pk);
         oldFeatureServerTag.setPrimary(featureServerTagRequest.isPrimary());
 
     }
@@ -61,7 +61,7 @@ public class FeatureServerTagService {
         FeatureServerTagPk pk = new FeatureServerTagPk(featureServerId, tagId);
         Validator.validateNotEmpty(pk, featureServerTagRepository::findById);
 
-        featureServerTagRepository.delete(featureServerTagRepository.getById(pk));
+        featureServerTagRepository.delete(featureServerTagRepository.getReferenceById(pk));
     }
 
 }

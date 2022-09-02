@@ -29,7 +29,6 @@ public class FeatureServerController {
     @PutMapping("/feature-servers/{name}")
     public ApiResponse<Void> updateFeatureServer(@PathVariable String name,
                                                  @RequestBody FeatureServerRequest featureServerRequest) {
-
         featureServerService.updateFeatureServer(name, featureServerRequest);
         return new SuccessResponse<>();
     }

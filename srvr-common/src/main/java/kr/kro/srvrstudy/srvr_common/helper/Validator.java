@@ -1,4 +1,4 @@
-package kr.kro.srvrstudy.srvr_main.helper;
+package kr.kro.srvrstudy.srvr_common.helper;
 
 import kr.kro.srvrstudy.srvr_common.exception.ApiFailureException;
 import kr.kro.srvrstudy.srvr_common.exception.ErrorCode;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import static kr.kro.srvrstudy.srvr_common.exception.ErrorCode.*;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Validator  {
+public class Validator {
 
     public static <T, E> void validateEmpty(T target, Function<T, Optional<E>> function) {
         validateEmpty(target, function, DUPLICATE_TARGET);

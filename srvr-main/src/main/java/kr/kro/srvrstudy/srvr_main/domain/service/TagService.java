@@ -2,7 +2,7 @@ package kr.kro.srvrstudy.srvr_main.domain.service;
 
 import kr.kro.srvrstudy.srvr_common.helper.IdGenerator;
 import kr.kro.srvrstudy.srvr_main.domain.model.Tag;
-import kr.kro.srvrstudy.srvr_main.helper.Validator;
+import kr.kro.srvrstudy.srvr_common.helper.Validator;
 import kr.kro.srvrstudy.srvr_main.persist.entity.TagEntity;
 import kr.kro.srvrstudy.srvr_main.persist.repository.TagRepository;
 import lombok.RequiredArgsConstructor;

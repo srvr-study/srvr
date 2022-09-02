@@ -1,13 +1,21 @@
 package kr.kro.srvrstudy.srvr_common.api.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Getter
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SuccessResponse.class),
+        @JsonSubTypes.Type(value = FailureResponse.class)
+})
 public abstract class ApiResponse<T> {
 
     private final BodyHeader header;
@@ -18,35 +26,41 @@ public abstract class ApiResponse<T> {
         this.result = result;
     }
 
-    @RequiredArgsConstructor
     @Getter
-    static class BodyHeader {
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class BodyHeader {
 
-        private final boolean isSuccessful;
-        private final String message;
-        private final long code;
-
+        private Boolean isSuccessful;
+        private String message;
+        private long code;
     }
 
     @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class BodyContent<T> {
 
         @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-        private Optional<Integer> totalCount;
+        private Integer totalCount;
 
         @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-        private Optional<T> content;
+        private T content;
 
         @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-        private Optional<Collection<T>> contents;
+        private Collection<T> contents;
 
         public BodyContent(T content) {
-            this.content = Optional.of(content);
+            Assert.notNull(content, "content can't be null");
+
+            this.content = content;
         }
 
         public BodyContent(Collection<T> contents) {
-            this.totalCount = Optional.of(contents.size());
-            this.contents = Optional.of(contents);
+            Assert.notEmpty(contents, "contents can't be empty");
+
+            this.totalCount = contents.size();
+            this.contents = contents;
         }
     }
 }
