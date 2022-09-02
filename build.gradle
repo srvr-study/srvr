@@ -62,11 +62,11 @@ subprojects {
 		outputs.dir snippetsDir
 	}
 
-	asciidoctor {
-		dependsOn test
-		configurations 'asciidoctorExt'
-		inputs.dir snippetsDir
-	}
+//	asciidoctor {
+//		dependsOn test
+//		configurations 'asciidoctorExt'
+//		inputs.dir snippetsDir
+//	}
 
 	task copyDocument(type: Copy) {
 		dependsOn asciidoctor

@@ -1,27 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('Stage 1') {
+        stage('Start docker') {
             steps {
                 script {
-                    echo 'Hello'
+                    sh 'docker-compose up -d ./docker/docker-compose.yml'
                 }
             }
         }
 
-        stage('Stage 2') {
+        stage('build main server') {
             steps {
                 script {
-                    echo 'World'
-                    sh 'sleep 5'
+                    sh 'gradle srvr-main:bootJar'
                 }
             }
         }
 
-        stage('Stage 3') {
+        stage('startup main server') {
             steps {
                 script {
-                    echo 'Good to see you!'
+                    sh 'java -jar -Dspring.profiles.active=local ./srvr-main-0.0.1-SNAPSHOT.jar'
                 }
             }
         }
