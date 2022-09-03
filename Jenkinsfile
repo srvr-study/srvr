@@ -4,7 +4,7 @@ pipeline {
         stage('main server') {
             steps {
                 dir('./srvr-main/src/main/resources') {
-                    writeFile encoding: 'UTF-8', file: './application-secret.properties', text: "${env.main-server-secret}"
+                    writeFile encoding: 'UTF-8', file: './application-secret.properties', text: "${params.main-server-secret}"
                     sh 'cat ./application-secret.properties'
 
                     writeFile encoding: 'UTF-8', file: './test', text: '${main-server-secret}'
