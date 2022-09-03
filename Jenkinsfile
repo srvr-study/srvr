@@ -4,8 +4,14 @@ pipeline {
         stage('main server') {
             steps {
                 dir('./srvr-main/src/main/resources') {
-                    writeFile encoding: 'UTF-8', file: './application-secret.properties', text: ${main-server-secret}
-                    readFile encoding: 'UTF-8', file: './application-secret.properties'
+                    writeFile encoding: 'UTF-8', file: './application-secret.properties', text: "${env.main-server-secret}"
+                    sh 'cat ./application-secret.properties'
+
+                    writeFile encoding: 'UTF-8', file: './test', text: '${main-server-secret}'
+                    sh 'cat ./test'
+
+                    writeFile encoding: 'UTF-8', file: './test2', text: 'test2'
+                    sh 'cat ./test2'
                 }
                 withGradle {
                     sh './gradlew srvr-main:clean'
